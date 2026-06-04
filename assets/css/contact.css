@@ -1,0 +1,135 @@
+/**
+ * Contact page — layout; form fields reuse booking.css.
+ */
+
+.site-main--contact {
+	background: var(--ac-tech-surface);
+}
+
+.ac-tech-contact {
+	padding-block: clamp(4rem, 8vw, 7.5rem);
+}
+
+.ac-tech-contact__grid {
+	display: grid;
+	gap: 3rem;
+	align-items: start;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-contact__grid {
+		grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+		gap: 3rem;
+	}
+}
+
+.ac-tech-contact-form__actions {
+	margin-top: 0.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid color-mix(in srgb, var(--ac-tech-outline-variant) 20%, transparent);
+}
+
+.ac-tech-contact-form__actions .ac-tech-booking-summary__submit {
+	width: 100%;
+	justify-content: center;
+	gap: 0.5rem;
+	padding-block: 1rem;
+	box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+}
+
+.ac-tech-contact__aside-col .ac-tech-contact-info {
+	height: 100%;
+	padding: 2rem;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+	border: 1px solid color-mix(in srgb, var(--ac-tech-outline-variant) 20%, transparent);
+	box-shadow: 0 4px 20px rgba(3, 4, 94, 0.12);
+}
+
+.ac-tech-contact__aside-col .ac-tech-contact-info__title {
+	margin: 0 0 2rem;
+	font-size: var(--ac-tech-font-headline-md);
+	font-weight: 600;
+	color: var(--ac-tech-on-surface);
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-contact__aside-col .ac-tech-contact-info {
+		position: sticky;
+		top: 7rem;
+	}
+}
+
+/* Contact Form 7 (și alte pluginuri) în cardul temei */
+.ac-tech-contact-form-card--shortcode .ac-tech-contact-form__plugin {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.ac-tech-contact-form__plugin .wpcf7 {
+	margin: 0;
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form p {
+	margin: 0;
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding-inline: 0.25rem;
+	font-size: var(--ac-tech-font-label-md);
+	font-weight: 500;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.ac-tech-contact-form__plugin .wpcf7-form select,
+.ac-tech-contact-form__plugin .wpcf7-form textarea {
+	width: 100%;
+	padding: 1rem;
+	border: none;
+	border-radius: var(--ac-tech-radius-lg);
+	background: var(--ac-tech-surface-container-low);
+	font-size: var(--ac-tech-font-body-md);
+	font-family: inherit;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form input:focus,
+.ac-tech-contact-form__plugin .wpcf7-form select:focus,
+.ac-tech-contact-form__plugin .wpcf7-form textarea:focus {
+	outline: none;
+	background: var(--ac-tech-surface-container-lowest);
+	box-shadow: 0 0 0 2px var(--ac-tech-primary-container);
+}
+
+.ac-tech-contact-form__plugin .wpcf7-form input[type="submit"],
+.ac-tech-contact-form__plugin .wpcf7-form .wpcf7-submit {
+	width: 100%;
+	padding: 1rem 1.5rem;
+	border: none;
+	border-radius: var(--ac-tech-radius-lg);
+	background: var(--ac-tech-primary);
+	color: var(--ac-tech-on-primary);
+	font-size: var(--ac-tech-font-label-md);
+	font-weight: 600;
+	font-family: inherit;
+	cursor: pointer;
+	box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+}
+
+.ac-tech-contact-form__plugin .wpcf7-response-output {
+	margin: 0;
+	padding: 0.75rem 1rem;
+	border-radius: var(--ac-tech-radius-md);
+	font-size: var(--ac-tech-font-label-md);
+}

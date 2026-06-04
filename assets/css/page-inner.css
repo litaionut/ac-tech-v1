@@ -1,0 +1,11 @@
+.site-main--page .ac-tech-content {
+	padding-block: var(--ac-tech-space-section);
+}
+
+.site-main--page .ac-tech-content .entry-content {
+	max-width: 48rem;
+}
+
+.ac-tech-values {
+	background: var(--ac-tech-surface-container-lowest);
+}

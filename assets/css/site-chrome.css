@@ -1,0 +1,482 @@
+/**
+ * Site header and footer — converted from home.html (glass-nav + inverse footer).
+ */
+
+body {
+	font-family: var(--ac-tech-font-family);
+	background-color: var(--ac-tech-background);
+	color: var(--ac-tech-on-background);
+}
+
+/* Header */
+.ac-tech-site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	backdrop-filter: blur(var(--ac-tech-glass-blur));
+	background: var(--ac-tech-glass-bg);
+	border-bottom: 1px solid var(--ac-tech-glass-border);
+}
+
+.ac-tech-site-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-block: 1rem;
+}
+
+.ac-tech-site-header__brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	text-decoration: none;
+	color: var(--ac-tech-on-surface);
+	min-width: 0;
+}
+
+.ac-tech-site-header__brand .custom-logo-link {
+	display: inline-flex;
+	line-height: 0;
+}
+
+.ac-tech-site-header__brand .custom-logo {
+	max-height: 2rem;
+	width: auto;
+}
+
+.ac-tech-site-logo {
+	flex-shrink: 0;
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-site-header__title {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-site-header__nav {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+/* Underscores base: .main-navigation { width: 100% } pushes links to the left */
+.ac-tech-site-header__nav.main-navigation {
+	width: auto;
+	flex: 0 1 auto;
+}
+
+.ac-tech-site-header__menu,
+.ac-tech-site-header__menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Override Underscores (style.css @ 37.5em): keep one breakpoint at 48rem
+ * so menu + hamburger are never visible together between 600–768px.
+ */
+@media (max-width: 47.99rem) {
+	.ac-tech-site-header__nav.main-navigation .ac-tech-site-header__menu {
+		display: none;
+	}
+
+	.ac-tech-site-header__nav.main-navigation.toggled .ac-tech-site-header__menu {
+		display: flex;
+	}
+
+	.ac-tech-site-header__nav .menu-toggle.ac-tech-site-header__toggle {
+		display: inline-flex;
+	}
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-site-header__nav.main-navigation > .ac-tech-site-header__menu {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.ac-tech-site-header__nav .menu-toggle.ac-tech-site-header__toggle {
+		display: none;
+	}
+}
+
+.ac-tech-site-header__menu a {
+	color: var(--ac-tech-on-surface-variant);
+	font-size: var(--ac-tech-font-label-md);
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.ac-tech-site-header__menu a:hover,
+.ac-tech-site-header__menu a:focus {
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-site-header__menu a:visited {
+	color: var(--ac-tech-on-surface-variant);
+}
+
+/* Submeniu (ex. Servicii) */
+.ac-tech-site-header__menu > li {
+	position: relative;
+}
+
+.ac-tech-site-header__menu .menu-item-has-children > a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.ac-tech-site-header__menu .menu-item-has-children > a::after {
+	content: "";
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.4rem;
+	margin-top: 0.15rem;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg);
+	opacity: 0.7;
+}
+
+.ac-tech-site-header__menu .sub-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ac-tech-site-header__menu .sub-menu a {
+	display: block;
+}
+
+@media (min-width: 48rem) {
+	/* Anulează Underscores (left: -999em) — altfel submeniul „sare” la hover */
+	.ac-tech-site-header__nav.main-navigation ul ul {
+		float: none;
+		left: auto;
+		box-shadow: none;
+	}
+
+	.ac-tech-site-header__menu .menu-item-has-children > .sub-menu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 12rem;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+		/* padding-top = pod invizibil; mouse-ul rămâne pe <li> părinte */
+		padding: 0.5rem 0 0.5rem;
+		margin: 0;
+		background: var(--ac-tech-surface);
+		border: 1px solid var(--ac-tech-glass-border);
+		border-radius: var(--ac-tech-radius);
+		box-shadow: var(--ac-tech-shadow-card);
+		z-index: 100;
+		pointer-events: none;
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0s linear 0.2s,
+			opacity 0.15s ease 0s;
+	}
+
+	.ac-tech-site-header__menu .menu-item-has-children:hover > .sub-menu,
+	.ac-tech-site-header__menu .menu-item-has-children.focus > .sub-menu {
+		pointer-events: auto;
+		visibility: visible;
+		opacity: 1;
+		transition:
+			visibility 0s linear 0s,
+			opacity 0.15s ease 0.05s;
+	}
+
+	.ac-tech-site-header__menu .sub-menu a {
+		padding: 0.5rem 1rem;
+		white-space: nowrap;
+	}
+}
+
+@media (max-width: 47.99rem) {
+	.ac-tech-site-header__menu .sub-menu {
+		display: none;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.35rem;
+		padding-inline-start: 1rem;
+		margin-block: 0.5rem 0;
+	}
+
+	.ac-tech-site-header__menu li.focus > .sub-menu,
+	.ac-tech-site-header__menu li:hover > .sub-menu {
+		display: flex;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu .sub-menu li + li {
+		margin-top: 0;
+	}
+}
+
+.ac-tech-site-header__actions {
+	display: none;
+	flex-shrink: 0;
+}
+
+.ac-tech-site-header__cta {
+	box-shadow: var(--ac-tech-shadow-card);
+}
+
+.ac-tech-site-header__toggle {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.3rem;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ac-tech-radius);
+	background: transparent;
+	cursor: pointer;
+}
+
+.ac-tech-site-header__toggle-bar {
+	display: block;
+	width: 1.25rem;
+	height: 2px;
+	margin-inline: auto;
+	background: var(--ac-tech-on-surface);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-site-header__inner {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		column-gap: 1rem;
+	}
+
+	.ac-tech-site-header__brand {
+		justify-self: start;
+	}
+
+	.ac-tech-site-header__nav {
+		display: flex;
+		justify-self: center;
+	}
+
+	.ac-tech-site-header__actions {
+		display: block;
+		justify-self: end;
+	}
+}
+
+@media (max-width: 47.99rem) {
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		padding: 1rem var(--ac-tech-grid-margin-mobile);
+		background: var(--ac-tech-glass-bg);
+		border-bottom: 1px solid var(--ac-tech-glass-border);
+		backdrop-filter: blur(var(--ac-tech-glass-blur));
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu li + li {
+		margin-top: 0.75rem;
+	}
+
+	.ac-tech-site-header__inner {
+		position: relative;
+		flex-wrap: wrap;
+	}
+
+	.ac-tech-site-header__nav.toggled + .ac-tech-site-header__actions,
+	.ac-tech-site-header__nav.toggled ~ .ac-tech-site-header__actions {
+		display: block;
+		width: 100%;
+	}
+
+	.ac-tech-site-header__nav.toggled ~ .ac-tech-site-header__actions .ac-tech-site-header__cta {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin-top: 0.75rem;
+	}
+}
+
+.ac-tech-site-header.is-scrolled .ac-tech-site-header__inner {
+	padding-block: 0.5rem;
+}
+
+/* Footer — home.html surface-dim */
+.ac-tech-site-footer {
+	background: var(--ac-tech-surface-dim);
+	color: var(--ac-tech-on-surface);
+	padding-block: 3rem;
+}
+
+.ac-tech-site-footer__grid {
+	display: grid;
+	gap: 3rem;
+	grid-template-columns: repeat(2, 1fr);
+	margin-bottom: 3rem;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-site-footer__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.ac-tech-site-footer__brand {
+		grid-column: auto;
+	}
+}
+
+.ac-tech-site-footer__brand {
+	grid-column: span 2;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-site-footer__brand {
+		grid-column: span 1;
+	}
+}
+
+.ac-tech-site-footer__brand-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 1.5rem;
+	text-decoration: none;
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-site-footer__brand-name {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-site-footer__tagline {
+	margin: 0;
+	max-width: 20rem;
+	color: var(--ac-tech-on-secondary-container);
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+
+.ac-tech-site-footer__column-title {
+	margin: 0 0 1.5rem;
+	font-size: var(--ac-tech-font-body-md);
+	font-weight: 700;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-site-footer__links {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ac-tech-site-footer__links li + li {
+	margin-top: 0.75rem;
+}
+
+.ac-tech-site-footer__links a,
+.ac-tech-site-footer__links li {
+	color: var(--ac-tech-on-secondary-container);
+	font-size: 0.875rem;
+}
+
+.ac-tech-site-footer__links a {
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.ac-tech-site-footer__links a:hover,
+.ac-tech-site-footer__links a:focus {
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-site-footer__links a:visited {
+	color: var(--ac-tech-on-secondary-container);
+}
+
+.ac-tech-site-footer__links--icons li {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.ac-tech-site-footer__icon {
+	width: 1.125rem;
+	height: 1.125rem;
+	color: var(--ac-tech-on-secondary-container);
+}
+
+.ac-tech-site-footer__bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--ac-tech-outline-variant);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-site-footer__bottom {
+		flex-direction: row;
+	}
+}
+
+.ac-tech-site-footer__copyright {
+	margin: 0;
+	color: var(--ac-tech-on-secondary-container);
+	font-size: 0.75rem;
+}
+
+.ac-tech-site-footer__social {
+	display: flex;
+	gap: 1rem;
+}
+
+.ac-tech-site-footer__social a {
+	color: var(--ac-tech-on-secondary-container);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.ac-tech-site-footer__social a:hover,
+.ac-tech-site-footer__social a:focus {
+	color: var(--ac-tech-primary);
+}
+
+.site-footer .site-info {
+	display: none;
+}
+
+.ac-tech-icon {
+	display: inline-block;
+	width: 1.25em;
+	height: 1.25em;
+	vertical-align: middle;
+	fill: currentColor;
+	flex-shrink: 0;
+}

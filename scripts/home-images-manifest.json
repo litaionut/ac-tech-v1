@@ -1,0 +1,248 @@
+{
+  "quality": 78,
+  "sets": {
+    "home": {
+      "hero-hvac": {
+        "widths": [
+          800,
+          1200
+        ],
+        "variants": [
+          {
+            "width": 800,
+            "height": 600,
+            "file": "hero-hvac-800.webp",
+            "bytes": 29096
+          },
+          {
+            "width": 1200,
+            "height": 900,
+            "file": "hero-hvac-1200.webp",
+            "bytes": 44570
+          }
+        ]
+      },
+      "service-instalare": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "service-instalare-400.webp",
+            "bytes": 11144
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "service-instalare-768.webp",
+            "bytes": 26232
+          }
+        ]
+      },
+      "service-igienizare": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "service-igienizare-400.webp",
+            "bytes": 9676
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "service-igienizare-768.webp",
+            "bytes": 21928
+          }
+        ]
+      },
+      "service-diagnostic": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "service-diagnostic-400.webp",
+            "bytes": 11372
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "service-diagnostic-768.webp",
+            "bytes": 25352
+          }
+        ]
+      },
+      "service-mentenanta": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "service-mentenanta-400.webp",
+            "bytes": 13402
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "service-mentenanta-768.webp",
+            "bytes": 30598
+          }
+        ]
+      },
+      "avatar-review-1": {
+        "widths": [
+          96
+        ],
+        "variants": [
+          {
+            "width": 96,
+            "height": 96,
+            "file": "avatar-review-1-96.webp",
+            "bytes": 1156
+          }
+        ]
+      },
+      "avatar-review-2": {
+        "widths": [
+          96
+        ],
+        "variants": [
+          {
+            "width": 96,
+            "height": 96,
+            "file": "avatar-review-2-96.webp",
+            "bytes": 1546
+          }
+        ]
+      },
+      "avatar-review-3": {
+        "widths": [
+          96
+        ],
+        "variants": [
+          {
+            "width": 96,
+            "height": 96,
+            "file": "avatar-review-3-96.webp",
+            "bytes": 1568
+          }
+        ]
+      }
+    },
+    "service-igienizare": {
+      "igienizare-hero": {
+        "widths": [
+          400,
+          800,
+          1200
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "igienizare-hero-400.webp",
+            "bytes": 10292
+          },
+          {
+            "width": 800,
+            "height": 800,
+            "file": "igienizare-hero-800.webp",
+            "bytes": 23298
+          },
+          {
+            "width": 1200,
+            "height": 1200,
+            "file": "igienizare-hero-1200.webp",
+            "bytes": 37326
+          }
+        ]
+      },
+      "igienizare-filtru": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "igienizare-filtru-400.webp",
+            "bytes": 8070
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "igienizare-filtru-768.webp",
+            "bytes": 19302
+          }
+        ]
+      },
+      "igienizare-presiune": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "igienizare-presiune-400.webp",
+            "bytes": 11016
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "igienizare-presiune-768.webp",
+            "bytes": 26706
+          }
+        ]
+      },
+      "igienizare-dezinfectare": {
+        "widths": [
+          400,
+          768
+        ],
+        "variants": [
+          {
+            "width": 400,
+            "height": 400,
+            "file": "igienizare-dezinfectare-400.webp",
+            "bytes": 13580
+          },
+          {
+            "width": 768,
+            "height": 768,
+            "file": "igienizare-dezinfectare-768.webp",
+            "bytes": 29786
+          }
+        ]
+      },
+      "igienizare-echipa": {
+        "widths": [
+          128
+        ],
+        "variants": [
+          {
+            "width": 128,
+            "height": 128,
+            "file": "igienizare-echipa-128.webp",
+            "bytes": 4366
+          }
+        ]
+      }
+    }
+  }
+}

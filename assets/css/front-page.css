@@ -1,0 +1,687 @@
+/**
+ * Homepage sections — converted from home.html using design tokens.
+ */
+
+html:has(.site-main--front) {
+	scroll-behavior: smooth;
+}
+
+.site-main--front {
+	width: 100%;
+	max-width: none;
+}
+
+/* Shared */
+.ac-tech-home-section {
+	padding-block: var(--ac-tech-space-section);
+}
+
+.ac-tech-home-section__header {
+	margin-bottom: 4rem;
+}
+
+.ac-tech-home-section__header--center {
+	text-align: center;
+}
+
+.ac-tech-home-section__title {
+	margin: 0 0 1rem;
+	font-size: var(--ac-tech-font-headline-md);
+	line-height: 1.3;
+	color: var(--ac-tech-on-surface);
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-section__title {
+		font-size: var(--ac-tech-font-display-lg);
+	}
+}
+
+.ac-tech-home-section__lead {
+	margin: 0 auto;
+	max-width: 42rem;
+	color: var(--ac-tech-on-surface-variant);
+	font-size: var(--ac-tech-font-body-md);
+	line-height: 1.6;
+}
+
+.ac-tech-home-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.25rem 0.75rem;
+	border-radius: var(--ac-tech-radius-full);
+	background: var(--ac-tech-primary-fixed);
+	color: var(--ac-tech-on-primary-fixed);
+	font-size: var(--ac-tech-font-label-sm);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.ac-tech-home-badge__icon {
+	font-size: 0.875rem;
+}
+
+.ac-tech-home-btn {
+	gap: 0.5rem;
+}
+
+.ac-tech-home-btn--outline {
+	border-width: 2px;
+}
+
+.ac-tech-cool-shadow,
+.ac-tech-home-hero__image-wrap,
+.ac-tech-home-hero__card,
+.ac-tech-home-service-card,
+.ac-tech-home-review-card,
+.ac-tech-home-cta-final__card,
+.ac-tech-home-process__number {
+	box-shadow: var(--ac-tech-shadow-card);
+}
+
+/* Hero */
+.ac-tech-home-hero {
+	position: relative;
+	overflow: hidden;
+	padding-block: clamp(5rem, 12vw, 12rem);
+	background: linear-gradient(135deg, var(--ac-tech-surface-container-lowest) 0%, var(--ac-tech-surface-container) 100%);
+}
+
+.ac-tech-home-hero__grid {
+	display: grid;
+	gap: 3rem;
+	align-items: center;
+	min-width: 0;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-hero__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.ac-tech-home-hero__content {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.ac-tech-home-hero__intro {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.ac-tech-home-hero__title {
+	margin: 0;
+	font-size: var(--ac-tech-font-display-lg);
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-hero__title-accent {
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-home-hero__text {
+	margin: 0;
+	max-width: 36rem;
+	font-size: var(--ac-tech-font-body-lg);
+	line-height: 1.6;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-home-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.ac-tech-home-hero__media {
+	position: relative;
+	min-width: 0;
+}
+
+.ac-tech-home-hero__image-wrap {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 4 / 3;
+	width: 100%;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-high);
+	transform: rotate(0);
+	transition: transform 0.5s ease;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-hero__image-wrap {
+		transform: rotate(2deg);
+	}
+
+	.ac-tech-home-hero__image-wrap:hover {
+		transform: rotate(0);
+	}
+}
+
+.ac-tech-home-hero__image-wrap picture {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.ac-tech-home-hero__image {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: none;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.ac-tech-home-hero__card {
+	display: none;
+	position: absolute;
+	left: -2rem;
+	bottom: -2rem;
+	align-items: center;
+	gap: 1rem;
+	padding: 1.5rem;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-hero__card {
+		display: flex;
+	}
+}
+
+.ac-tech-home-hero__card-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem;
+	border-radius: var(--ac-tech-radius);
+	background: var(--ac-tech-primary-fixed);
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-home-hero__card-icon .ac-tech-icon {
+	font-size: 2rem;
+}
+
+.ac-tech-home-hero__card-title {
+	margin: 0;
+	font-weight: 700;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-hero__card-text {
+	margin: 0;
+	font-size: 0.875rem;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+/* Advantages */
+.ac-tech-home-advantages {
+	background: var(--ac-tech-surface);
+}
+
+.ac-tech-home-advantages__grid {
+	display: grid;
+	gap: var(--ac-tech-grid-gutter);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-advantages__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-advantages__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.ac-tech-home-advantage-card {
+	padding: 2rem;
+	border: 1px solid var(--ac-tech-outline-variant);
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+	transition: border-color 0.2s ease;
+}
+
+.ac-tech-home-advantage-card:hover {
+	border-color: var(--ac-tech-primary);
+}
+
+.ac-tech-home-advantage-card__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	margin-bottom: 1.5rem;
+	border-radius: var(--ac-tech-radius);
+	background: var(--ac-tech-surface-container-low);
+	color: var(--ac-tech-primary);
+	transition: background-color 0.2s ease;
+}
+
+.ac-tech-home-advantage-card:hover .ac-tech-home-advantage-card__icon {
+	background: var(--ac-tech-primary-fixed);
+}
+
+.ac-tech-home-advantage-card__icon .ac-tech-icon {
+	font-size: 1.875rem;
+}
+
+.ac-tech-home-advantage-card__title {
+	margin: 0 0 0.75rem;
+	font-size: var(--ac-tech-font-headline-sm);
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-advantage-card__text {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.6;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+/* Services */
+.ac-tech-home-services {
+	background: var(--ac-tech-surface-container-low);
+}
+
+.ac-tech-home-services__header {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin-bottom: 4rem;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-services__header {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+}
+
+.ac-tech-home-services__intro {
+	max-width: 42rem;
+}
+
+.ac-tech-home-services__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--ac-tech-primary);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ac-tech-home-services__link:visited {
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-home-services__link .ac-tech-icon {
+	transition: transform 0.2s ease;
+}
+
+.ac-tech-home-services__link:hover .ac-tech-icon,
+.ac-tech-home-services__link:focus .ac-tech-icon {
+	transform: translateX(0.25rem);
+}
+
+.ac-tech-home-services__grid {
+	display: grid;
+	gap: var(--ac-tech-grid-gutter);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-services__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.ac-tech-home-service-card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-service-card {
+		flex-direction: row;
+	}
+}
+
+.ac-tech-home-service-card__media {
+	flex-shrink: 0;
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-service-card__media {
+		width: 40%;
+	}
+}
+
+.ac-tech-home-service-card__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 15rem;
+	object-fit: cover;
+}
+
+.ac-tech-home-service-card__body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2rem;
+}
+
+.ac-tech-home-service-card__title {
+	margin: 0 0 0.75rem;
+	font-size: var(--ac-tech-font-headline-sm);
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-service-card__text {
+	margin: 0 0 1.5rem;
+	font-size: 0.875rem;
+	line-height: 1.6;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-home-service-card__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	color: var(--ac-tech-primary);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ac-tech-home-service-card__link:visited {
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-home-service-card__link:hover,
+.ac-tech-home-service-card__link:focus {
+	text-decoration: underline;
+}
+
+.ac-tech-home-service-card__link-icon {
+	font-size: 1rem;
+}
+
+/* Process */
+.ac-tech-home-process {
+	background: var(--ac-tech-surface);
+}
+
+.ac-tech-home-process__grid {
+	display: grid;
+	gap: 3rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-process__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.ac-tech-home-process__step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.ac-tech-home-process__number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 5rem;
+	height: 5rem;
+	margin-bottom: 1.5rem;
+	border-radius: var(--ac-tech-radius-full);
+	background: var(--ac-tech-primary-fixed);
+	color: var(--ac-tech-primary);
+	font-size: 1.875rem;
+	font-weight: 700;
+}
+
+.ac-tech-home-process__number--final {
+	background: var(--ac-tech-primary);
+	color: var(--ac-tech-on-primary);
+}
+
+.ac-tech-home-process__title {
+	margin: 0 0 0.5rem;
+	font-size: var(--ac-tech-font-headline-sm);
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-process__text {
+	margin: 0;
+	font-size: 0.875rem;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+/* Reviews */
+.ac-tech-home-reviews {
+	background: rgb(222 227 230 / 30%);
+}
+
+.ac-tech-home-reviews__rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.25rem;
+	margin-top: 0.5rem;
+	color: var(--ac-tech-tertiary-container);
+}
+
+.ac-tech-home-reviews__star {
+	font-variation-settings: 'FILL' 1;
+}
+
+.ac-tech-home-reviews__score {
+	margin-left: 0.5rem;
+	color: var(--ac-tech-on-surface);
+	font-weight: 700;
+}
+
+.ac-tech-home-reviews__grid {
+	display: grid;
+	gap: var(--ac-tech-grid-gutter);
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-home-reviews__grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.ac-tech-home-review-card {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 2rem;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+}
+
+.ac-tech-home-review-card--featured {
+	border-top: 4px solid var(--ac-tech-primary);
+}
+
+.ac-tech-home-review-card__quote {
+	color: var(--ac-tech-primary);
+	opacity: 0.2;
+}
+
+.ac-tech-home-review-card__quote .ac-tech-icon {
+	font-size: 3rem;
+}
+
+.ac-tech-home-review-card__text {
+	margin: 0;
+	font-style: italic;
+	line-height: 1.6;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-home-review-card__author {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-top: auto;
+}
+
+.ac-tech-home-review-card__avatar {
+	width: 3rem;
+	height: 3rem;
+	border-radius: var(--ac-tech-radius-full);
+	object-fit: cover;
+	background: var(--ac-tech-surface-dim);
+}
+
+.ac-tech-home-review-card__name {
+	margin: 0;
+	font-weight: 700;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-review-card__role {
+	margin: 0;
+	font-size: 0.75rem;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+/* Final CTA */
+.ac-tech-home-cta-final {
+	position: relative;
+	overflow: hidden;
+	background: var(--ac-tech-primary);
+}
+
+.ac-tech-home-cta-final__pattern {
+	position: absolute;
+	inset: 0;
+	opacity: 0.1;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M40 0H0V40' fill='none' stroke='white' stroke-width='0.5'/%3E%3C/svg%3E");
+}
+
+.ac-tech-home-cta-final__inner {
+	position: relative;
+	z-index: 1;
+}
+
+.ac-tech-home-cta-final__card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2.5rem;
+	padding: clamp(2.5rem, 6vw, 5rem);
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-lowest);
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-cta-final__card {
+		flex-direction: row;
+	}
+}
+
+.ac-tech-home-cta-final__content {
+	text-align: center;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-cta-final__content {
+		text-align: left;
+	}
+}
+
+.ac-tech-home-cta-final__title {
+	margin: 0 0 1rem;
+	font-size: var(--ac-tech-font-display-lg);
+	line-height: 1.1;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-home-cta-final__text {
+	margin: 0;
+	max-width: 36rem;
+	font-size: var(--ac-tech-font-body-lg);
+	line-height: 1.6;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-home-cta-final__actions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+	flex-shrink: 0;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-home-cta-final__actions {
+		align-items: flex-end;
+	}
+}
+
+.ac-tech-home-cta-final__btn {
+	padding: 1.25rem 2.5rem;
+	font-size: var(--ac-tech-font-body-lg);
+}
+
+.ac-tech-home-cta-final__phone {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	color: var(--ac-tech-on-surface);
+	font-size: var(--ac-tech-font-headline-sm);
+	font-weight: 700;
+}
+
+.ac-tech-home-cta-final__phone a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.ac-tech-home-cta-final__phone a:visited {
+	color: inherit;
+}
+
+.ac-tech-home-cta-final__phone .ac-tech-icon {
+	color: var(--ac-tech-primary);
+}

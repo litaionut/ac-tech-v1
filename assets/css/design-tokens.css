@@ -1,0 +1,104 @@
+/**
+ * AC-Tech design tokens — Atmospheric Comfort System.
+ * Source: css.css (Local Sites/ac-tech)
+ */
+
+:root {
+	/* Surfaces */
+	--ac-tech-surface: #f5fafd;
+	--ac-tech-surface-dim: #d5dbde;
+	--ac-tech-surface-bright: #f5fafd;
+	--ac-tech-surface-container-lowest: #ffffff;
+	--ac-tech-surface-container-low: #eff4f7;
+	--ac-tech-surface-container: #e9eff1;
+	--ac-tech-surface-container-high: #e3e9ec;
+	--ac-tech-surface-container-highest: #dee3e6;
+	--ac-tech-surface-variant: #dee3e6;
+	--ac-tech-background: #f5fafd;
+	--ac-tech-inverse-surface: #2b3134;
+	--ac-tech-inverse-on-surface: #ecf2f4;
+
+	/* Content colors */
+	--ac-tech-on-surface: #171c1f;
+	--ac-tech-on-surface-variant: #3d494d;
+	--ac-tech-on-background: #171c1f;
+	--ac-tech-outline: #6d797e;
+	--ac-tech-outline-variant: #bcc9ce;
+	--ac-tech-surface-tint: #00677d;
+	--ac-tech-navy: #03045e;
+
+	/* Brand */
+	--ac-tech-primary: #00677d;
+	--ac-tech-on-primary: #ffffff;
+	--ac-tech-primary-container: #00b4d8;
+	--ac-tech-on-primary-container: #00414f;
+	--ac-tech-inverse-primary: #4cd6fb;
+	--ac-tech-secondary: #5b5f61;
+	--ac-tech-on-secondary: #ffffff;
+	--ac-tech-secondary-container: #e0e3e6;
+	--ac-tech-on-secondary-container: #626567;
+	--ac-tech-tertiary: #914d00;
+	--ac-tech-on-tertiary: #ffffff;
+	--ac-tech-tertiary-container: #eb8f3b;
+	--ac-tech-on-tertiary-container: #5d2f00;
+
+	/* Status */
+	--ac-tech-error: #ba1a1a;
+	--ac-tech-on-error: #ffffff;
+	--ac-tech-error-container: #ffdad6;
+	--ac-tech-on-error-container: #93000a;
+
+	/* Fixed tones */
+	--ac-tech-primary-fixed: #b3ebff;
+	--ac-tech-primary-fixed-dim: #4cd6fb;
+	--ac-tech-on-primary-fixed: #001f27;
+	--ac-tech-on-primary-fixed-variant: #004e5f;
+
+	/* Legacy aliases (existing theme classes) */
+	--ac-tech-color-bg: var(--ac-tech-surface-container-lowest);
+	--ac-tech-color-surface: var(--ac-tech-surface-container-low);
+	--ac-tech-color-text: var(--ac-tech-on-surface);
+	--ac-tech-color-muted: var(--ac-tech-on-surface-variant);
+	--ac-tech-color-primary: var(--ac-tech-primary-container);
+	--ac-tech-color-primary-dark: var(--ac-tech-primary);
+	--ac-tech-color-accent: var(--ac-tech-tertiary-container);
+
+	/* Radius */
+	--ac-tech-radius-sm: 0.25rem;
+	--ac-tech-radius: 0.5rem;
+	--ac-tech-radius-md: 0.75rem;
+	--ac-tech-radius-lg: 1rem;
+	--ac-tech-radius-xl: 1.5rem;
+	--ac-tech-radius-full: 9999px;
+
+	/* Spacing */
+	--ac-tech-space-base: 0.5rem;
+	--ac-tech-space-section: clamp(4rem, 8vw, 7.5rem);
+	--ac-tech-space-section-mobile: 4rem;
+	--ac-tech-grid-margin-desktop: 5rem;
+	--ac-tech-grid-margin-tablet: 2.5rem;
+	--ac-tech-grid-margin-mobile: 1.25rem;
+	--ac-tech-grid-gutter: 1.5rem;
+	--ac-tech-container: 80rem;
+	--ac-tech-space: clamp(1.5rem, 4vw, 3rem);
+
+	/* Typography */
+	--ac-tech-font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--ac-tech-font-display-lg: clamp(2.25rem, 5vw, 3rem);
+	--ac-tech-font-headline-md: clamp(1.625rem, 3vw, 1.875rem);
+	--ac-tech-font-headline-sm: 1.5rem;
+	--ac-tech-font-body-lg: 1.125rem;
+	--ac-tech-font-body-md: 1rem;
+	--ac-tech-font-label-md: 0.875rem;
+	--ac-tech-font-label-sm: 0.75rem;
+
+	/* Elevation */
+	--ac-tech-shadow-cool: 0 4px 20px rgb(3 4 94 / 12%);
+	--ac-tech-shadow-card: 0 4px 20px rgb(0 103 125 / 12%);
+	--ac-tech-shadow-glow: 0 0 15px rgb(0 180 216 / 40%);
+
+	/* Effects */
+	--ac-tech-glass-bg: rgb(255 255 255 / 85%);
+	--ac-tech-glass-border: rgb(0 103 125 / 10%);
+	--ac-tech-glass-blur: 12px;
+}
