@@ -17,6 +17,7 @@ function ac_tech_get_page_templates() {
 		'template-contact.php'       => __( 'Contact', 'ac-tech' ),
 		'template-igienizare-ac.php' => __( 'Igienizare AC', 'ac-tech' ),
 		'template-booking.php'       => __( 'Programare', 'ac-tech' ),
+		'template-booking-settings.php' => __( 'Setări booking (admin)', 'ac-tech' ),
 	);
 }
 

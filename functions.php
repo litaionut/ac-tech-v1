@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.10.4' );
+	define( '_S_VERSION', '1.12.4' );
 }
 
 /**
@@ -177,9 +177,17 @@ require get_template_directory() . '/inc/home-content.php';
 require get_template_directory() . '/inc/service-igienizare-content.php';
 
 /**
- * Booking page static content.
+ * Booking page static content + custom booking engine.
  */
 require get_template_directory() . '/inc/booking-content.php';
+require get_template_directory() . '/inc/booking-cpt.php';
+require get_template_directory() . '/inc/booking-acf-fields.php';
+require get_template_directory() . '/inc/booking-availability.php';
+require get_template_directory() . '/inc/booking-blocks.php';
+require get_template_directory() . '/inc/booking-admin.php';
+require get_template_directory() . '/inc/booking-emails.php';
+require get_template_directory() . '/inc/booking-api.php';
+require get_template_directory() . '/inc/booking-admin-calendar.php';
 
 /**
  * Contact page static content.
@@ -195,6 +203,7 @@ require get_template_directory() . '/inc/blog-content.php';
 require get_template_directory() . '/inc/blog-helpers.php';
 require get_template_directory() . '/inc/blog-editable.php';
 require get_template_directory() . '/inc/blog-acf-fields.php';
+require get_template_directory() . '/inc/booking-editable.php';
 
 /**
  * Single post templates — registration, helpers, editable content.

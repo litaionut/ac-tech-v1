@@ -265,11 +265,22 @@
 	cursor: default;
 }
 
+.ac-tech-booking-slots__hint {
+	margin: 0.35rem 0 0;
+	font-size: var(--ac-tech-font-label-sm);
+	color: var(--ac-tech-on-surface-variant);
+}
+
 .ac-tech-booking-slots__grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 0.75rem;
 	margin-top: 0.5rem;
+}
+
+.ac-tech-booking-slots__grid.is-loading {
+	opacity: 0.55;
+	pointer-events: none;
 }
 
 .ac-tech-booking-slots__btn {

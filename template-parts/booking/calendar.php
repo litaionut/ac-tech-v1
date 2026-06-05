@@ -31,20 +31,9 @@ $success  = ac_tech_get_booking_success();
 
 	<div class="ac-tech-booking-slots">
 		<span class="ac-tech-booking-field__label"><?php echo esc_html( $calendar['slots_label'] ); ?></span>
-		<div class="ac-tech-booking-slots__grid" id="ac-tech-booking-slots" role="group" aria-label="<?php echo esc_attr( $calendar['slots_label'] ); ?>">
-			<?php
-			$first = true;
-			foreach ( $calendar['time_slots'] as $value => $label ) :
-				?>
-				<button type="button" class="ac-tech-booking-slots__btn<?php echo $first ? ' is-active' : ''; ?>" data-slot="<?php echo esc_attr( $value ); ?>">
-					<?php echo esc_html( $label ); ?>
-				</button>
-				<?php
-				$first = false;
-			endforeach;
-			?>
-		</div>
-		<input type="hidden" name="time_slot" id="ac-tech-booking-time" form="ac-tech-booking-form" value="10:00-12:00">
+		<p class="ac-tech-booking-slots__hint" id="ac-tech-booking-slots-hint"></p>
+		<div class="ac-tech-booking-slots__grid" id="ac-tech-booking-slots" role="group" aria-label="<?php echo esc_attr( $calendar['slots_label'] ); ?>"></div>
+		<input type="hidden" name="time_slot" id="ac-tech-booking-time" form="ac-tech-booking-form" value="">
 	</div>
 
 	<div class="ac-tech-booking-summary">

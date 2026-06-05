@@ -152,6 +152,23 @@ function ac_tech_enqueue_presentation_assets() {
 				_S_VERSION,
 				true
 			);
+			wp_localize_script(
+				'ac-tech-booking',
+				'acTechBooking',
+				array(
+					'restUrl'  => esc_url_raw( rest_url( 'ac-tech/v1/' ) ),
+					'nonce'    => wp_create_nonce( 'wp_rest' ),
+					'messages' => array(
+						'selectService' => __( 'Selectează serviciul pentru a vedea intervalele.', 'ac-tech' ),
+						'loadingSlots'  => __( 'Se încarcă intervalele...', 'ac-tech' ),
+						'noSlots'       => __( 'Nu există intervale disponibile în această zi.', 'ac-tech' ),
+						'selectSlot'    => __( 'Selectează un interval orar.', 'ac-tech' ),
+						'submitting'    => __( 'Se trimite programarea...', 'ac-tech' ),
+						'errorGeneric'  => __( 'Nu am putut finaliza programarea. Încearcă din nou.', 'ac-tech' ),
+						'errorConflict' => __( 'Intervalul nu mai este disponibil. Alege alt interval.', 'ac-tech' ),
+					),
+				)
+			);
 		}
 
 		if ( ac_tech_is_contact_page() ) {

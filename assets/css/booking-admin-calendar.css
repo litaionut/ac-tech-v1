@@ -1,0 +1,259 @@
+/**
+ * Admin booking calendar — WP admin page.
+ */
+
+.ac-tech-admin-calendar-wrap .description {
+	max-width: 52rem;
+}
+
+.ac-tech-admin-calendar-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 1.5rem;
+	margin: 1rem 0 1.25rem;
+}
+
+.ac-tech-admin-calendar-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	min-width: 12rem;
+}
+
+.ac-tech-admin-calendar-field span {
+	font-weight: 600;
+}
+
+.ac-tech-admin-calendar-field--services {
+	min-width: 100%;
+	flex: 1 1 100%;
+}
+
+.ac-tech-admin-calendar-services {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 0.35rem 1rem;
+	padding: 0.65rem 0.75rem;
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+}
+
+.ac-tech-admin-calendar-services__item {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin: 0;
+	font-weight: 400;
+}
+
+.ac-tech-admin-calendar-services__actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.ac-tech-admin-calendar-layout {
+	display: grid;
+	grid-template-columns: minmax(280px, 420px) minmax(260px, 1fr);
+	gap: 1.5rem;
+	align-items: start;
+}
+
+@media (max-width: 960px) {
+	.ac-tech-admin-calendar-layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+.ac-tech-admin-calendar-panel {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 1rem;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__month {
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day {
+	min-height: 2.25rem;
+	position: relative;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__days.is-loading {
+	opacity: 0.55;
+	pointer-events: none;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-blocked-full {
+	background: #f8d7da;
+	color: #842029;
+	font-weight: 600;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-blocked-partial {
+	background: #fff3cd;
+	color: #664d03;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-visitor-open:not(.is-blocked-full) {
+	box-shadow: inset 0 0 0 2px #198754;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-visitor-closed:not(.is-blocked-full):not(.is-blocked-partial) {
+	opacity: 0.55;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-active {
+	box-shadow: inset 0 0 0 2px #2271b1;
+}
+
+.ac-tech-admin-calendar-legend {
+	display: grid;
+	gap: 0.35rem;
+	margin: 1rem 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: 12px;
+	color: #50575e;
+}
+
+.ac-tech-admin-calendar-legend li {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.ac-tech-admin-calendar-legend__swatch {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 3px;
+	border: 1px solid #c3c4c7;
+	flex-shrink: 0;
+}
+
+.ac-tech-admin-calendar-legend__swatch.is-blocked-full {
+	background: #f8d7da;
+	border-color: #f5c2c7;
+}
+
+.ac-tech-admin-calendar-legend__swatch.is-blocked-partial {
+	background: #fff3cd;
+	border-color: #ffecb5;
+}
+
+.ac-tech-admin-calendar-legend__swatch.is-visitor-open {
+	box-shadow: inset 0 0 0 2px #198754;
+	background: #fff;
+}
+
+.ac-tech-admin-calendar-legend__swatch.is-visitor-closed {
+	background: #f0f0f1;
+}
+
+.ac-tech-admin-calendar-side {
+	display: grid;
+	gap: 1rem;
+}
+
+.ac-tech-admin-calendar-action,
+.ac-tech-admin-calendar-blocks {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 1rem;
+}
+
+.ac-tech-admin-calendar-action h2,
+.ac-tech-admin-calendar-blocks h2 {
+	margin-top: 0;
+	font-size: 1rem;
+}
+
+.ac-tech-admin-calendar-action__steps {
+	margin: 0 0 1rem;
+	padding-left: 1.15rem;
+	color: #50575e;
+	font-size: 12px;
+}
+
+.ac-tech-admin-calendar-action__date {
+	display: block;
+	font-size: 1.1rem;
+	color: #1d2327;
+}
+
+.ac-tech-admin-calendar-action .ac-tech-admin-calendar-field {
+	margin-bottom: 0.75rem;
+}
+
+.ac-tech-admin-calendar-action__interval {
+	display: grid;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.ac-tech-admin-calendar-action__range {
+	display: grid;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.ac-tech-admin-calendar-action__hint {
+	margin: 0.35rem 0 0;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-in-range {
+	background: #dbeafe;
+	color: #1e3a8a;
+}
+
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-range-start,
+.ac-tech-admin-calendar .ac-tech-booking-calendar__day.is-range-end {
+	box-shadow: inset 0 0 0 2px #2271b1;
+	font-weight: 600;
+}
+
+.ac-tech-admin-calendar-action__confirm {
+	width: 100%;
+	margin-top: 0.25rem;
+	justify-content: center;
+}
+
+.ac-tech-admin-calendar-status {
+	min-height: 1.25rem;
+	margin: 0 0 0.5rem;
+	font-size: 12px;
+	color: #50575e;
+}
+
+.ac-tech-admin-calendar-blocks__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ac-tech-admin-calendar-blocks__item {
+	display: grid;
+	gap: 0.15rem;
+	padding: 0.65rem 0;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.ac-tech-admin-calendar-blocks__item:last-child {
+	border-bottom: none;
+}
+
+.ac-tech-admin-calendar-blocks__meta {
+	font-size: 12px;
+	color: #646970;
+}
+
+.ac-tech-admin-calendar-blocks__empty {
+	padding: 0.5rem 0;
+	color: #646970;
+	font-style: italic;
+}
