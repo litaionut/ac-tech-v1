@@ -208,6 +208,29 @@ body {
 }
 
 @media (max-width: 47.99rem) {
+	/* Submeniul rămâne în flux — Underscores folosește position:absolute și acoperă itemii de dedesubt */
+	.ac-tech-site-header__nav.main-navigation ul ul {
+		position: static;
+		float: none;
+		left: auto;
+		top: auto;
+		box-shadow: none;
+		z-index: auto;
+	}
+
+	.ac-tech-site-header__nav.main-navigation ul ul a {
+		width: auto;
+	}
+
+	.ac-tech-site-header__menu .menu-item-has-children > a::after {
+		transition: transform 0.2s ease;
+	}
+
+	.ac-tech-site-header__menu .menu-item-has-children.focus > a::after {
+		transform: rotate(-135deg);
+		margin-top: 0.3rem;
+	}
+
 	.ac-tech-site-header__menu .sub-menu {
 		display: none;
 		flex-direction: column;
@@ -215,15 +238,20 @@ body {
 		gap: 0.35rem;
 		padding-inline-start: 1rem;
 		margin-block: 0.5rem 0;
+		border-inline-start: 2px solid var(--ac-tech-outline-variant);
 	}
 
-	.ac-tech-site-header__menu li.focus > .sub-menu,
-	.ac-tech-site-header__menu li:hover > .sub-menu {
+	.ac-tech-site-header__menu li.focus > .sub-menu {
 		display: flex;
 	}
 
 	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu .sub-menu li + li {
 		margin-top: 0;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu .sub-menu a {
+		padding-block: 0.35rem;
+		font-size: var(--ac-tech-font-label-sm);
 	}
 }
 
@@ -312,6 +340,9 @@ body {
 		top: 100%;
 		left: 0;
 		right: 0;
+		max-height: calc(100dvh - 4.5rem);
+		overflow-y: auto;
+		overscroll-behavior: contain;
 		padding: 1rem var(--ac-tech-grid-margin-mobile);
 		background: var(--ac-tech-glass-bg);
 		border-bottom: 1px solid var(--ac-tech-glass-border);
@@ -333,6 +364,15 @@ body {
 
 	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu li + li {
 		margin-top: 0.75rem;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu .menu-item-has-children {
+		position: static;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu .menu-item-has-children > .sub-menu {
+		position: static;
+		width: 100%;
 	}
 
 	.ac-tech-site-header__inner {

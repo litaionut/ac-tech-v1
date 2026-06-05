@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.12.5' );
+	define( '_S_VERSION', '1.12.9' );
 }
 
 /**
@@ -186,6 +186,7 @@ require get_template_directory() . '/inc/booking-availability.php';
 require get_template_directory() . '/inc/booking-blocks.php';
 require get_template_directory() . '/inc/booking-admin.php';
 require get_template_directory() . '/inc/booking-emails.php';
+require get_template_directory() . '/inc/booking-security.php';
 require get_template_directory() . '/inc/booking-api.php';
 require get_template_directory() . '/inc/booking-admin-calendar.php';
 

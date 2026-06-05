@@ -158,6 +158,21 @@ function ac_tech_rest_get_availability( $request ) {
  * @return WP_REST_Response|WP_Error
  */
 function ac_tech_rest_create_booking( $request ) {
+	if ( ! ac_tech_booking_reservations_are_open() ) {
+		return new WP_Error(
+			'bookings_closed',
+			__( 'Rezervările online sunt temporar oprite. Te rugăm să ne contactezi telefonic.', 'ac-tech' ),
+			array( 'status' => 503 )
+		);
+	}
+
+	$rate_check = ac_tech_booking_rate_limit_check();
+	if ( is_wp_error( $rate_check ) ) {
+		return $rate_check;
+	}
+
+	ac_tech_booking_rate_limit_record_attempt();
+
 	$params = $request->get_json_params();
 	if ( ! is_array( $params ) ) {
 		$params = array();

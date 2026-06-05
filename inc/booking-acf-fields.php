@@ -172,6 +172,15 @@ function ac_tech_register_booking_acf_field_group() {
 					'instructions' => __( 'Gol = e-mailul admin implicit.', 'ac-tech' ),
 				),
 				array(
+					'key'           => 'field_ac_tech_booking_reservations_enabled',
+					'label'         => __( 'Acceptă rezervări online', 'ac-tech' ),
+					'name'          => 'booking_reservations_enabled',
+					'type'          => 'true_false',
+					'ui'            => 1,
+					'default_value' => 1,
+					'instructions'  => __( 'Dezactivat = formularul nu mai acceptă programări noi. Poți comuta rapid din Programări → banner.', 'ac-tech' ),
+				),
+				array(
 					'key'   => 'field_ac_tech_booking_tab_blocks',
 					'label' => __( 'Blocări calendar', 'ac-tech' ),
 					'name'  => '',

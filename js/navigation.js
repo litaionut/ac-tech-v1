@@ -64,9 +64,33 @@
 		link.addEventListener( 'blur', toggleFocus, true );
 	}
 
-	// Toggle focus each time a menu link with children receive a touch event.
+	// Toggle focus each time a menu link with children receive a touch or click (mobile drawer).
 	for ( const link of linksWithChildren ) {
-		link.addEventListener( 'touchstart', toggleFocus, false );
+		link.addEventListener( 'touchstart', toggleFocus, { passive: false } );
+		link.addEventListener( 'click', onParentLinkClick, false );
+	}
+
+	function isMobileNav() {
+		return window.matchMedia( '(max-width: 47.99rem)' ).matches;
+	}
+
+	function onParentLinkClick( event ) {
+		if ( ! isMobileNav() || ! siteNavigation.classList.contains( 'toggled' ) ) {
+			return;
+		}
+
+		const menuItem = this.parentNode;
+		const isOpen = menuItem.classList.contains( 'focus' );
+
+		if ( ! isOpen ) {
+			event.preventDefault();
+			for ( const sibling of menuItem.parentNode.children ) {
+				if ( menuItem !== sibling ) {
+					sibling.classList.remove( 'focus' );
+				}
+			}
+			menuItem.classList.add( 'focus' );
+		}
 	}
 
 	/**

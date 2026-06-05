@@ -271,6 +271,18 @@
 	color: var(--ac-tech-on-surface-variant);
 }
 
+.ac-tech-booking-slots__hint.is-danger {
+	margin-top: 0.75rem;
+	padding: 0.875rem 1rem;
+	border-radius: var(--ac-tech-radius-md);
+	border: 1px solid color-mix(in srgb, var(--ac-tech-error) 30%, transparent);
+	background: var(--ac-tech-error-container);
+	color: var(--ac-tech-on-error-container);
+	font-size: var(--ac-tech-font-body-md);
+	font-weight: 600;
+	line-height: 1.5;
+}
+
 .ac-tech-booking-slots__grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -441,6 +453,24 @@ body.ac-tech-booking-modal-open {
 	width: 100%;
 	justify-content: center;
 	padding-block: 1rem;
+}
+
+.ac-tech-booking-closed-notice {
+	grid-column: 1 / -1;
+	margin: 0 0 1.5rem;
+	padding: 1rem 1.25rem;
+	border-radius: var(--ac-tech-radius-lg);
+	border: 1px solid color-mix(in srgb, var(--ac-tech-error) 30%, transparent);
+	background: var(--ac-tech-error-container);
+	color: var(--ac-tech-on-error-container);
+	font-size: var(--ac-tech-font-body-md);
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+.ac-tech-booking-form.is-closed {
+	opacity: 0.72;
+	pointer-events: none;
 }
 
 .ac-tech-booking-success__calendar {

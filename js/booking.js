@@ -34,6 +34,44 @@
 	var selectedDate = null;
 	var monthAvailability = {};
 	var isSubmitting = false;
+	var reservationsFlag = parseInt( api.reservationsOpen, 10 );
+	var bookingsClosed = ! isNaN( reservationsFlag ) && 1 !== reservationsFlag;
+
+	function setBookingsClosed() {
+		var bookingSection = document.getElementById( 'ac-tech-booking' );
+		if ( bookingSection && ! document.getElementById( 'ac-tech-booking-closed-notice' ) ) {
+			var notice = document.createElement( 'div' );
+			notice.id = 'ac-tech-booking-closed-notice';
+			notice.className = 'ac-tech-booking-closed-notice';
+			notice.setAttribute( 'role', 'alert' );
+			notice.textContent = msgs.bookingsClosed || 'Rezervările online sunt temporar oprite.';
+			bookingSection.insertBefore( notice, bookingSection.firstChild );
+		}
+
+		form.classList.add( 'is-closed' );
+		form.querySelectorAll( 'input, select, textarea, button' ).forEach( function ( el ) {
+			el.disabled = true;
+		} );
+
+		if ( submitBtn ) {
+			submitBtn.disabled = true;
+		}
+
+		var prevBtn = document.getElementById( 'ac-tech-booking-prev' );
+		var nextBtn = document.getElementById( 'ac-tech-booking-next' );
+		if ( prevBtn ) {
+			prevBtn.disabled = true;
+		}
+		if ( nextBtn ) {
+			nextBtn.disabled = true;
+		}
+
+		if ( slotsHint ) {
+			slotsHint.classList.add( 'is-danger' );
+		}
+
+		setSlotsHint( msgs.bookingsClosed || '' );
+	}
 
 	function pad( n ) {
 		return n < 10 ? '0' + n : String( n );
@@ -435,6 +473,11 @@
 	form.addEventListener( 'submit', function ( e ) {
 		e.preventDefault();
 
+		if ( bookingsClosed ) {
+			alert( msgs.bookingsClosed || 'Rezervările online sunt temporar oprite.' );
+			return;
+		}
+
 		if ( isSubmitting ) {
 			return;
 		}
@@ -486,6 +529,10 @@
 				if ( err.status === 409 || err.code === 'slot_unavailable' || err.code === 'slot_conflict' ) {
 					message = msgs.errorConflict || message;
 					loadDaySlots();
+				} else if ( err.code === 'bookings_closed' || err.status === 503 ) {
+					message = msgs.bookingsClosed || message;
+				} else if ( err.code === 'rate_limited' || err.status === 429 ) {
+					message = msgs.rateLimited || message;
 				}
 				alert( err.message || message );
 			} )
@@ -497,6 +544,10 @@
 			} );
 	} );
 
-	renderWeekdays();
-	refreshCalendar();
+	if ( bookingsClosed ) {
+		setBookingsClosed();
+	} else {
+		renderWeekdays();
+		refreshCalendar();
+	}
 } )();

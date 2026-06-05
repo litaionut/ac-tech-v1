@@ -156,9 +156,10 @@ function ac_tech_enqueue_presentation_assets() {
 				'ac-tech-booking',
 				'acTechBooking',
 				array(
-					'restUrl'  => esc_url_raw( rest_url( 'ac-tech/v1/' ) ),
-					'nonce'    => wp_create_nonce( 'wp_rest' ),
-					'messages' => array(
+					'restUrl'            => esc_url_raw( rest_url( 'ac-tech/v1/' ) ),
+					'nonce'              => wp_create_nonce( 'wp_rest' ),
+					'reservationsOpen'   => ac_tech_booking_reservations_are_open() ? 1 : 0,
+					'messages'           => array(
 						'selectService' => __( 'Selectează serviciul pentru a vedea intervalele.', 'ac-tech' ),
 						'loadingSlots'  => __( 'Se încarcă intervalele...', 'ac-tech' ),
 						'noSlots'       => __( 'Nu există intervale disponibile în această zi.', 'ac-tech' ),
@@ -166,6 +167,8 @@ function ac_tech_enqueue_presentation_assets() {
 						'submitting'    => __( 'Se trimite programarea...', 'ac-tech' ),
 						'errorGeneric'  => __( 'Nu am putut finaliza programarea. Încearcă din nou.', 'ac-tech' ),
 						'errorConflict' => __( 'Intervalul nu mai este disponibil. Alege alt interval.', 'ac-tech' ),
+						'bookingsClosed'=> __( 'Rezervările online sunt temporar oprite. Te rugăm să ne contactezi telefonic.', 'ac-tech' ),
+						'rateLimited'   => __( 'Ai atins limita de 5 programări pe oră. Încearcă din nou mai târziu.', 'ac-tech' ),
 					),
 				)
 			);
