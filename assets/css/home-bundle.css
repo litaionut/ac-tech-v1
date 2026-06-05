@@ -210,7 +210,7 @@ body {
 }
 
 @media (min-width: 48rem) {
-	.ac-tech-site-header__nav.main-navigation > .ac-tech-site-header__menu {
+	.ac-tech-site-header__nav.main-navigation .ac-tech-site-header__menu {
 		display: flex;
 		align-items: center;
 		gap: 2rem;
@@ -343,6 +343,10 @@ body {
 	flex-shrink: 0;
 }
 
+.ac-tech-site-header__drawer {
+	display: contents;
+}
+
 .ac-tech-site-header__cta {
 	box-shadow: var(--ac-tech-shadow-card);
 }
@@ -382,18 +386,35 @@ body {
 	}
 
 	.ac-tech-site-header__nav {
-		display: flex;
+		display: contents;
+	}
+
+	.ac-tech-site-header__drawer {
+		display: contents;
+	}
+
+	.ac-tech-site-header__menu {
+		grid-column: 2;
 		justify-self: center;
 	}
 
 	.ac-tech-site-header__actions {
 		display: block;
+		grid-column: 3;
 		justify-self: end;
 	}
 }
 
 @media (max-width: 47.99rem) {
-	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu {
+	.ac-tech-site-header__nav {
+		position: static;
+	}
+
+	.ac-tech-site-header__drawer {
+		display: none;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__drawer {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
@@ -406,6 +427,19 @@ body {
 		background: var(--ac-tech-glass-bg);
 		border-bottom: 1px solid var(--ac-tech-glass-border);
 		backdrop-filter: blur(var(--ac-tech-glass-blur));
+		z-index: 40;
+	}
+
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+		position: static;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		backdrop-filter: none;
 	}
 
 	.ac-tech-site-header__nav.toggled .ac-tech-site-header__menu li + li {
@@ -417,17 +451,15 @@ body {
 		flex-wrap: wrap;
 	}
 
-	.ac-tech-site-header__nav.toggled + .ac-tech-site-header__actions,
-	.ac-tech-site-header__nav.toggled ~ .ac-tech-site-header__actions {
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__actions {
 		display: block;
-		width: 100%;
+		margin-top: 0.75rem;
 	}
 
-	.ac-tech-site-header__nav.toggled ~ .ac-tech-site-header__actions .ac-tech-site-header__cta {
+	.ac-tech-site-header__nav.toggled .ac-tech-site-header__cta {
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin-top: 0.75rem;
 	}
 }
 
