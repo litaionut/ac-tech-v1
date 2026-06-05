@@ -1146,8 +1146,7 @@ html:has(.site-main--front) {
 }
 
 .ac-tech-cool-shadow,
-.ac-tech-home-hero__image-wrap,
-.ac-tech-home-hero__card,
+.ac-tech-home-carousel__media,
 .ac-tech-home-service-card,
 .ac-tech-home-review-card,
 .ac-tech-home-cta-final__card,
@@ -1155,40 +1154,69 @@ html:has(.site-main--front) {
 	box-shadow: var(--ac-tech-shadow-card);
 }
 
-/* Hero */
-.ac-tech-home-hero {
+/* Hero carousel */
+.ac-tech-home-carousel {
 	position: relative;
-	overflow: hidden;
-	padding-block: clamp(5rem, 12vw, 12rem);
-	background: linear-gradient(135deg, var(--ac-tech-surface-container-lowest) 0%, var(--ac-tech-surface-container) 100%);
+	padding-block: clamp(2rem, 4vw, var(--ac-tech-space-section));
 }
 
-.ac-tech-home-hero__grid {
-	display: grid;
-	gap: 3rem;
-	align-items: center;
-	min-width: 0;
+.ac-tech-home-carousel__layout {
+	display: flex;
+	flex-direction: column;
+	min-height: clamp(24rem, 50vh, 37.5rem);
+	overflow: hidden;
+	border-radius: var(--ac-tech-radius-xl);
+	background: var(--ac-tech-surface-container-low);
+	box-shadow: var(--ac-tech-shadow-card);
 }
 
 @media (min-width: 64rem) {
-	.ac-tech-home-hero__grid {
-		grid-template-columns: 1fr 1fr;
+	.ac-tech-home-carousel__layout {
+		flex-direction: row;
 	}
 }
 
-.ac-tech-home-hero__content {
+.ac-tech-home-carousel__content {
 	display: flex;
+	flex: 1 1 50%;
 	flex-direction: column;
-	gap: 2rem;
+	justify-content: center;
+	padding: clamp(2rem, 4vw, 3.5rem);
+	background: var(--ac-tech-surface-container-lowest);
+	z-index: 1;
 }
 
-.ac-tech-home-hero__intro {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+.ac-tech-home-carousel__slides {
+	position: relative;
+	min-height: 18rem;
 }
 
-.ac-tech-home-hero__title {
+.ac-tech-home-carousel__slide {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(0.75rem);
+	transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+}
+
+.ac-tech-home-carousel__slide.is-active {
+	position: relative;
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.ac-tech-home-carousel__badge {
+	width: fit-content;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.ac-tech-home-carousel__title {
 	margin: 0;
 	font-size: var(--ac-tech-font-display-lg);
 	font-weight: 700;
@@ -1197,11 +1225,25 @@ html:has(.site-main--front) {
 	color: var(--ac-tech-on-surface);
 }
 
-.ac-tech-home-hero__title-accent {
+.ac-tech-home-carousel__title-accent {
 	color: var(--ac-tech-primary);
 }
 
-.ac-tech-home-hero__text {
+.ac-tech-home-carousel__promo-highlight {
+	color: var(--ac-tech-primary-container);
+	font-weight: 800;
+}
+
+.ac-tech-home-carousel__title-accent .ac-tech-home-carousel__promo-highlight {
+	color: var(--ac-tech-tertiary-container);
+}
+
+.ac-tech-home-carousel__text .ac-tech-home-carousel__promo-highlight {
+	color: var(--ac-tech-primary);
+	font-weight: 700;
+}
+
+.ac-tech-home-carousel__text {
 	margin: 0;
 	max-width: 36rem;
 	font-size: var(--ac-tech-font-body-lg);
@@ -1209,101 +1251,94 @@ html:has(.site-main--front) {
 	color: var(--ac-tech-on-surface-variant);
 }
 
-.ac-tech-home-hero__actions {
+.ac-tech-home-carousel__actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
 }
 
-.ac-tech-home-hero__media {
-	position: relative;
-	min-width: 0;
+.ac-tech-home-carousel__dots {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 3rem;
 }
 
-.ac-tech-home-hero__image-wrap {
+.ac-tech-home-carousel__dot {
+	width: 3rem;
+	height: 0.25rem;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ac-tech-radius-full);
+	background: var(--ac-tech-outline-variant);
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ac-tech-home-carousel__dot.is-active {
+	background: var(--ac-tech-primary);
+}
+
+.ac-tech-home-carousel__dot:focus-visible {
+	outline: 2px solid var(--ac-tech-primary);
+	outline-offset: 2px;
+}
+
+.ac-tech-home-carousel__media {
 	position: relative;
+	flex: 1 1 50%;
+	min-height: 16rem;
 	overflow: hidden;
-	aspect-ratio: 4 / 3;
-	width: 100%;
-	border-radius: var(--ac-tech-radius-xl);
-	background: var(--ac-tech-surface-container-high);
-	transform: rotate(0);
-	transition: transform 0.5s ease;
 }
 
 @media (min-width: 64rem) {
-	.ac-tech-home-hero__image-wrap {
-		transform: rotate(2deg);
-	}
-
-	.ac-tech-home-hero__image-wrap:hover {
-		transform: rotate(0);
+	.ac-tech-home-carousel__media {
+		min-height: auto;
 	}
 }
 
-.ac-tech-home-hero__image-wrap picture {
+.ac-tech-home-carousel__media-item {
 	position: absolute;
 	inset: 0;
+	opacity: 0;
+	transition: opacity 0.7s ease;
+}
+
+.ac-tech-home-carousel__media-item.is-active {
+	opacity: 1;
+}
+
+.ac-tech-home-carousel__media-item picture,
+.ac-tech-home-carousel__media-item img {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
 
-.ac-tech-home-hero__image {
-	position: absolute;
-	inset: 0;
-	display: block;
+.ac-tech-home-carousel__media-img {
 	width: 100%;
 	height: 100%;
-	min-width: 100%;
-	min-height: 100%;
-	max-width: none;
+	min-height: 16rem;
 	object-fit: cover;
-	object-position: center center;
 }
 
-.ac-tech-home-hero__card {
-	display: none;
+.ac-tech-home-carousel__media-overlay {
 	position: absolute;
-	left: -2rem;
-	bottom: -2rem;
-	align-items: center;
-	gap: 1rem;
-	padding: 1.5rem;
-	border-radius: var(--ac-tech-radius-xl);
-	background: var(--ac-tech-surface-container-lowest);
+	inset: 0;
+	background: linear-gradient(to right, rgb(255 255 255 / 20%), transparent);
+	pointer-events: none;
 }
 
-@media (min-width: 48rem) {
-	.ac-tech-home-hero__card {
-		display: flex;
+@media (min-width: 64rem) {
+	.ac-tech-home-carousel__media-overlay {
+		display: none;
 	}
 }
 
-.ac-tech-home-hero__card-icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.75rem;
-	border-radius: var(--ac-tech-radius);
-	background: var(--ac-tech-primary-fixed);
-	color: var(--ac-tech-primary);
-}
-
-.ac-tech-home-hero__card-icon .ac-tech-icon {
-	font-size: 2rem;
-}
-
-.ac-tech-home-hero__card-title {
-	margin: 0;
-	font-weight: 700;
-	color: var(--ac-tech-on-surface);
-}
-
-.ac-tech-home-hero__card-text {
-	margin: 0;
-	font-size: 0.875rem;
-	color: var(--ac-tech-on-surface-variant);
+@media (prefers-reduced-motion: reduce) {
+	.ac-tech-home-carousel__slide,
+	.ac-tech-home-carousel__media-item {
+		transition: none;
+	}
 }
 
 /* Advantages */

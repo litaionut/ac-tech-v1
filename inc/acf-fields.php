@@ -50,6 +50,22 @@ function ac_tech_disable_retired_pilot_field_group( $field_group ) {
 		$field_group['active'] = false;
 	}
 
+	// Prefer PHP-registered homepage fields (flat hero slide fields, ACF Free compatible).
+	if ( 'group_ac_tech_homepage' === ( $field_group['key'] ?? '' ) && ! empty( $field_group['ID'] ) ) {
+		$field_group['active'] = false;
+	}
+
 	return $field_group;
 }
 add_filter( 'acf/load_field_group', 'ac_tech_disable_retired_pilot_field_group' );
+
+/**
+ * Hide legacy repeater if a synced copy still exists in the database.
+ *
+ * @param array<string, mixed>|false $field ACF field.
+ * @return array<string, mixed>|false
+ */
+function ac_tech_hide_retired_home_hero_slides_field( $field ) {
+	return false;
+}
+add_filter( 'acf/load_field/name=home_hero_slides', 'ac_tech_hide_retired_home_hero_slides_field', 20 );

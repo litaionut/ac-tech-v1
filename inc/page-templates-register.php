@@ -13,7 +13,7 @@
 function ac_tech_get_page_templates() {
 	return array(
 		'template-about.php'         => __( 'Despre noi', 'ac-tech' ),
-		'template-services.php'      => __( 'Servicii', 'ac-tech' ),
+		'template-services.php'      => __( 'Servicii — catalog', 'ac-tech' ),
 		'template-contact.php'       => __( 'Contact', 'ac-tech' ),
 		'template-igienizare-ac.php' => __( 'Igienizare AC', 'ac-tech' ),
 		'template-booking.php'       => __( 'Programare', 'ac-tech' ),

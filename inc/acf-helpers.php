@@ -49,6 +49,28 @@ function ac_tech_get_front_page_id() {
 }
 
 /**
+ * Normalize ACF post_id values (e.g. "page_12" → 12) for admin load_value checks.
+ *
+ * @param mixed $post_id ACF post ID.
+ * @return int
+ */
+function ac_tech_acf_resolve_post_id( $post_id ) {
+	if ( is_numeric( $post_id ) ) {
+		return (int) $post_id;
+	}
+
+	if ( ! is_string( $post_id ) || '' === $post_id ) {
+		return 0;
+	}
+
+	if ( preg_match( '/_(\d+)$/', $post_id, $matches ) ) {
+		return (int) $matches[1];
+	}
+
+	return 0;
+}
+
+/**
  * Default content for the text + image pilot section.
  *
  * @return array<string, string>

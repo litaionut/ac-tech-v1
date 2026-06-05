@@ -13,7 +13,7 @@ function ac_tech_customize_register_home_hero( $wp_customize ) {
 		'ac_tech_home_hero',
 		array(
 			'title'       => __( 'Homepage — Hero', 'ac-tech' ),
-			'description' => __( 'Texte, imagine și linkuri pentru secțiunea hero. Câmpurile din pagina Acasă (ACF) au prioritate dacă pluginul Advanced Custom Fields este activ.', 'ac-tech' ),
+			'description' => __( 'Hero-ul homepage folosește acum un carousel editabil din pagina Acasă (ACF → Slide-uri promo). Secțiunea de mai jos rămâne doar ca fallback vechi.', 'ac-tech' ),
 			'priority'    => 32,
 		)
 	);

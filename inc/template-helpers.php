@@ -42,6 +42,15 @@ function ac_tech_is_contact_page() {
 }
 
 /**
+ * Whether the current page uses the Services catalog template.
+ *
+ * @return bool
+ */
+function ac_tech_is_services_all_page() {
+	return is_page_template( 'template-services.php' );
+}
+
+/**
  * Default service cards for the services template and homepage preview.
  *
  * @return array<int, array{title: string, description: string, icon: string}>

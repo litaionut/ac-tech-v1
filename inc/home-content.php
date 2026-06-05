@@ -6,58 +6,106 @@
  */
 
 /**
- * Default homepage hero (theme mockup) — without ACF / Customizer overrides.
+ * Default homepage hero carousel slides — without ACF overrides.
  *
- * @return array<string, mixed>
+ * @return array<int, array<string, mixed>>
  */
-function ac_tech_get_home_hero_base() {
-	$primary_url = function_exists( 'ac_tech_get_booking_url' )
+function ac_tech_get_home_hero_carousel_base() {
+	$booking_url = function_exists( 'ac_tech_get_booking_url' )
 		? ac_tech_get_booking_url()
 		: home_url( '/programare/' );
 
 	return apply_filters(
-		'ac_tech_home_hero_base',
+		'ac_tech_home_hero_carousel_base',
 		array(
-			'badge_icon'        => 'ac_unit',
-			'badge_text'        => __( 'Service Autorizat', 'ac-tech' ),
-			'title'             => __( 'Aer curat. Confort maxim.', 'ac-tech' ),
-			'title_accent'      => __( 'Servicii profesionale.', 'ac-tech' ),
-			'text'              => __( 'Instalare, mentenanță și igienizare profesională pentru locuințe și spații comerciale. Performanță garantată pentru orice sistem de climatizare.', 'ac-tech' ),
-			'cta_primary'       => __( 'Programează o intervenție', 'ac-tech' ),
-			'cta_primary_icon'  => 'calendar_today',
-			'cta_secondary'     => __( 'Solicită ofertă', 'ac-tech' ),
-			'cta_primary_url'   => $primary_url,
-			'cta_secondary_url' => home_url( '/contact/' ),
-			'image'             => array(
-				'slug'            => 'hero-hvac',
-				'alt'             => __( 'Tehnician HVAC inspectează un aparat de aer condiționat montat pe perete', 'ac-tech' ),
-				'widths'          => array( 800, 1200 ),
-				'src_width'       => 800,
-				'sizes'           => '(min-width: 64rem) 50vw, 100vw',
-				'loading'         => 'eager',
-				'fetchpriority'   => 'high',
-				'class'           => 'ac-tech-home-hero__image',
-				'use_picture'     => true,
-				'omit_dimensions' => true,
+			array(
+				'badge_icon'   => 'sell',
+				'badge_text'   => __( 'Ofertă limitată', 'ac-tech' ),
+				'title'        => __( 'Pregătește-te de vară!', 'ac-tech' ),
+				'title_accent' => __( '30% reducere la a doua unitate internă instalată', 'ac-tech' ),
+				'text'         => __( 'Echipa AC-Tech îți asigură confortul termic ideal. Profită acum de oferta noastră specială pentru instalări multiple.', 'ac-tech' ),
+				'cta_label'    => __( 'Profită de ofertă', 'ac-tech' ),
+				'cta_url'      => $booking_url,
+				'cta_icon'     => 'arrow_forward',
+				'image'        => ac_tech_get_home_carousel_image_config( 'hero-hvac' ),
 			),
-			'card_icon'         => 'verified',
-			'card_title'        => __( '100% Garanție', 'ac-tech' ),
-			'card_text'         => __( 'Pentru orice lucrare', 'ac-tech' ),
+			array(
+				'badge_icon'   => 'sell',
+				'badge_text'   => __( 'Promoție instalare', 'ac-tech' ),
+				'title'        => __( '30% reducere la a doua unitate internă instalată', 'ac-tech' ),
+				'title_accent' => '',
+				'text'         => __( 'Profită de reducerea pentru al doilea aparat montat în aceeași locuință sau spațiu comercial.', 'ac-tech' ),
+				'cta_label'    => __( 'Programează acum', 'ac-tech' ),
+				'cta_url'      => $booking_url,
+				'cta_icon'     => 'arrow_forward',
+				'image'        => ac_tech_get_home_carousel_image_config( 'service-instalare' ),
+			),
+			array(
+				'badge_icon'   => 'verified',
+				'badge_text'   => __( 'Ofertă', 'ac-tech' ),
+				'title'        => __( 'Măsurarea eficienței gratuită', 'ac-tech' ),
+				'title_accent' => __( 'la orice igienizare sau instalare', 'ac-tech' ),
+				'text'         => __( 'Includem măsurarea eficienței fără cost suplimentar la fiecare igienizare sau instalare realizată de echipa AC-Tech.', 'ac-tech' ),
+				'cta_label'    => __( 'Solicită ofertă', 'ac-tech' ),
+				'cta_url'      => home_url( '/contact/' ),
+				'cta_icon'     => 'arrow_forward',
+				'image'        => ac_tech_get_home_carousel_image_config( 'service-igienizare' ),
+			),
 		)
 	);
 }
 
 /**
+ * Theme WebP config for a carousel slide image.
+ *
+ * @param string $slug Image slug under assets/images/home/.
+ * @return array<string, mixed>
+ */
+function ac_tech_get_home_carousel_image_config( $slug ) {
+	$alts = array(
+		'hero-hvac'           => __( 'Tehnician HVAC inspectează un aparat de aer condiționat montat pe perete', 'ac-tech' ),
+		'service-instalare'   => __( 'Instalare profesională aer condiționat', 'ac-tech' ),
+		'service-igienizare'  => __( 'Igienizare profesională aer condiționat', 'ac-tech' ),
+		'service-diagnostic'  => __( 'Diagnostic aer condiționat', 'ac-tech' ),
+		'service-mentenanta'  => __( 'Mentenanță aer condiționat', 'ac-tech' ),
+	);
+
+	return array(
+		'slug'            => sanitize_key( $slug ),
+		'alt'             => isset( $alts[ $slug ] ) ? $alts[ $slug ] : __( 'Promoție AC-Tech', 'ac-tech' ),
+		'widths'          => 'hero-hvac' === $slug ? array( 800, 1200 ) : array( 768, 1200 ),
+		'src_width'       => 'hero-hvac' === $slug ? 800 : 768,
+		'sizes'           => '(min-width: 64rem) 50vw, 100vw',
+		'loading'         => 'eager',
+		'fetchpriority'   => 'high',
+		'class'           => 'ac-tech-home-carousel__media-img',
+		'use_picture'     => true,
+		'omit_dimensions' => true,
+	);
+}
+
+/**
+ * @return array<int, array<string, mixed>>
+ */
+function ac_tech_get_home_hero_carousel() {
+	$slides = apply_filters( 'ac_tech_home_hero_carousel', ac_tech_get_home_hero_carousel_base() );
+
+	if ( function_exists( 'ac_tech_home_merge_hero_carousel' ) ) {
+		$slides = ac_tech_home_merge_hero_carousel( $slides );
+	}
+
+	return $slides;
+}
+
+/**
+ * First carousel slide — used for LCP preload and legacy helpers.
+ *
  * @return array<string, mixed>
  */
 function ac_tech_get_home_hero() {
-	$hero = apply_filters( 'ac_tech_home_hero', ac_tech_get_home_hero_base() );
+	$slides = ac_tech_get_home_hero_carousel();
 
-	if ( function_exists( 'ac_tech_home_hero_apply_editable' ) ) {
-		$hero = ac_tech_home_hero_apply_editable( $hero );
-	}
-
-	return $hero;
+	return ! empty( $slides[0] ) ? $slides[0] : array();
 }
 
 /**

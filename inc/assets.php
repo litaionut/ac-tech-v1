@@ -138,6 +138,22 @@ function ac_tech_enqueue_presentation_assets() {
 			);
 		}
 
+		if ( ac_tech_is_services_all_page() ) {
+			wp_enqueue_style(
+				'ac-tech-services-all',
+				get_template_directory_uri() . '/assets/css/services-all.css',
+				array( 'ac-tech-page-inner' ),
+				_S_VERSION
+			);
+			wp_enqueue_script(
+				'ac-tech-services-all',
+				get_template_directory_uri() . '/js/services-all.js',
+				array(),
+				_S_VERSION,
+				true
+			);
+		}
+
 		if ( ac_tech_is_booking_page() ) {
 			wp_enqueue_style(
 				'ac-tech-booking',

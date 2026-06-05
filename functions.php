@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.12.9' );
+	define( '_S_VERSION', '1.13.7' );
 }
 
 /**
@@ -167,9 +167,9 @@ require get_template_directory() . '/inc/template-helpers.php';
 /**
  * Homepage static content helpers.
  */
+require get_template_directory() . '/inc/home-content.php';
 require get_template_directory() . '/inc/home-editable.php';
 require get_template_directory() . '/inc/home-acf-fields.php';
-require get_template_directory() . '/inc/home-content.php';
 
 /**
  * Igienizare AC service page content.
@@ -196,6 +196,14 @@ require get_template_directory() . '/inc/booking-admin-calendar.php';
 require get_template_directory() . '/inc/contact-content.php';
 require get_template_directory() . '/inc/contact-editable.php';
 require get_template_directory() . '/inc/contact-acf-fields.php';
+
+/**
+ * Services catalog page content.
+ */
+require get_template_directory() . '/inc/services-all-content.php';
+require get_template_directory() . '/inc/services-all-editable.php';
+require get_template_directory() . '/inc/services-all-acf-fields.php';
+require get_template_directory() . '/inc/services-all-render.php';
 
 /**
  * Blog index content helpers.

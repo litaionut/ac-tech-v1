@@ -25,6 +25,91 @@ function ac_tech_home_advantage_icon_choices() {
 }
 
 /**
+ * ACF fields for one hero carousel slide (ACF Free compatible — no repeater).
+ *
+ * @param int $slide_index Slide number 1–3.
+ * @return array<int, array<string, mixed>>
+ */
+function ac_tech_home_hero_slide_acf_fields( $slide_index ) {
+	$slide_index = max( 1, min( 3, (int) $slide_index ) );
+	$prefix      = 'hero_slide_' . $slide_index . '_';
+
+	return array(
+		array(
+			'key'   => 'field_ac_tech_home_tab_hero_slide_' . $slide_index,
+			'label' => sprintf(
+				/* translators: %d: slide number */
+				__( 'Slide %d', 'ac-tech' ),
+				$slide_index
+			),
+			'name'  => '',
+			'type'  => 'tab',
+		),
+		array(
+			'key'           => 'field_ac_tech_' . $prefix . 'badge_icon',
+			'label'         => __( 'Badge — iconiță', 'ac-tech' ),
+			'name'          => $prefix . 'badge_icon',
+			'type'          => 'select',
+			'choices'       => ac_tech_home_advantage_icon_choices(),
+			'default_value' => 'sell',
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'badge_text',
+			'label' => __( 'Badge — text', 'ac-tech' ),
+			'name'  => $prefix . 'badge_text',
+			'type'  => 'text',
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'title',
+			'label' => __( 'Titlu — rând 1', 'ac-tech' ),
+			'name'  => $prefix . 'title',
+			'type'  => 'text',
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'title_accent',
+			'label' => __( 'Titlu — rând 2 (accent)', 'ac-tech' ),
+			'name'  => $prefix . 'title_accent',
+			'type'  => 'text',
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'text',
+			'label' => __( 'Paragraf', 'ac-tech' ),
+			'name'  => $prefix . 'text',
+			'type'  => 'textarea',
+			'rows'  => 3,
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'cta_label',
+			'label' => __( 'Buton — text', 'ac-tech' ),
+			'name'  => $prefix . 'cta_label',
+			'type'  => 'text',
+		),
+		array(
+			'key'   => 'field_ac_tech_' . $prefix . 'cta_url',
+			'label' => __( 'Buton — link', 'ac-tech' ),
+			'name'  => $prefix . 'cta_url',
+			'type'  => 'url',
+		),
+		array(
+			'key'           => 'field_ac_tech_' . $prefix . 'image',
+			'label'         => __( 'Imagine slide', 'ac-tech' ),
+			'name'          => $prefix . 'image',
+			'type'          => 'image',
+			'return_format' => 'id',
+			'preview_size'  => 'medium',
+			'instructions'  => __( 'Gol = imagine WebP din temă (fallback).', 'ac-tech' ),
+		),
+		array(
+			'key'     => 'field_ac_tech_' . $prefix . 'image_fallback',
+			'label'   => __( 'Imagine fallback temă', 'ac-tech' ),
+			'name'    => $prefix . 'image_fallback',
+			'type'    => 'select',
+			'choices' => ac_tech_home_carousel_image_fallback_choices(),
+		),
+	);
+}
+
+/**
  * Register homepage ACF fields (local).
  */
 function ac_tech_register_home_acf_field_group() {
@@ -39,80 +124,20 @@ function ac_tech_register_home_acf_field_group() {
 			'fields'                => array(
 				array(
 					'key'   => 'field_ac_tech_home_tab_hero',
-					'label' => __( 'Hero', 'ac-tech' ),
+					'label' => __( 'Hero — carousel', 'ac-tech' ),
 					'name'  => '',
 					'type'  => 'tab',
 				),
 				array(
-					'key'   => 'field_ac_tech_hero_badge_text',
-					'label' => __( 'Badge', 'ac-tech' ),
-					'name'  => 'hero_badge_text',
-					'type'  => 'text',
+					'key'     => 'field_ac_tech_home_hero_help',
+					'label'   => '',
+					'name'    => '',
+					'type'    => 'message',
+					'message' => __( 'Editați cele 3 slide-uri promo din tab-urile Slide 1–3. Câmpurile goale folosesc conținutul implicit al temei.', 'ac-tech' ),
 				),
-				array(
-					'key'   => 'field_ac_tech_hero_title',
-					'label' => __( 'Titlu — rând 1', 'ac-tech' ),
-					'name'  => 'hero_title',
-					'type'  => 'text',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_title_accent',
-					'label' => __( 'Titlu — rând 2 (accent)', 'ac-tech' ),
-					'name'  => 'hero_title_accent',
-					'type'  => 'text',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_text',
-					'label' => __( 'Paragraf', 'ac-tech' ),
-					'name'  => 'hero_text',
-					'type'  => 'textarea',
-					'rows'  => 4,
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_cta_primary',
-					'label' => __( 'Buton principal — text', 'ac-tech' ),
-					'name'  => 'hero_cta_primary',
-					'type'  => 'text',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_cta_primary_url',
-					'label' => __( 'Buton principal — link', 'ac-tech' ),
-					'name'  => 'hero_cta_primary_url',
-					'type'  => 'url',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_cta_secondary',
-					'label' => __( 'Buton secundar — text', 'ac-tech' ),
-					'name'  => 'hero_cta_secondary',
-					'type'  => 'text',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_cta_secondary_url',
-					'label' => __( 'Buton secundar — link', 'ac-tech' ),
-					'name'  => 'hero_cta_secondary_url',
-					'type'  => 'url',
-				),
-				array(
-					'key'           => 'field_ac_tech_hero_image',
-					'label'         => __( 'Imagine hero', 'ac-tech' ),
-					'name'          => 'hero_image',
-					'type'          => 'image',
-					'return_format' => 'id',
-					'preview_size'  => 'medium',
-					'instructions'  => __( 'Gol = imagine WebP din temă.', 'ac-tech' ),
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_card_title',
-					'label' => __( 'Card imagine — titlu', 'ac-tech' ),
-					'name'  => 'hero_card_title',
-					'type'  => 'text',
-				),
-				array(
-					'key'   => 'field_ac_tech_hero_card_text',
-					'label' => __( 'Card imagine — text', 'ac-tech' ),
-					'name'  => 'hero_card_text',
-					'type'  => 'text',
-				),
+				...ac_tech_home_hero_slide_acf_fields( 1 ),
+				...ac_tech_home_hero_slide_acf_fields( 2 ),
+				...ac_tech_home_hero_slide_acf_fields( 3 ),
 				array(
 					'key'   => 'field_ac_tech_home_tab_adv',
 					'label' => __( 'Avantaje', 'ac-tech' ),

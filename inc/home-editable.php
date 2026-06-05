@@ -5,7 +5,9 @@
  * @package AC-Tech
  */
 
-define( 'AC_TECH_HOME_SEED_OPTION', 'ac_tech_home_seeded_v2' );
+define( 'AC_TECH_HOME_SEED_OPTION', 'ac_tech_home_seeded_v4' );
+
+define( 'AC_TECH_HOME_CAROUSEL_SEED_OPTION', 'ac_tech_home_carousel_seeded_v5' );
 
 /**
  * @deprecated Use AC_TECH_HOME_SEED_OPTION.
@@ -13,23 +15,110 @@ define( 'AC_TECH_HOME_SEED_OPTION', 'ac_tech_home_seeded_v2' );
 define( 'AC_TECH_HOME_HERO_SEED_OPTION', 'ac_tech_home_hero_seeded_v1' );
 
 /**
- * Map hero ACF fields to hero array keys.
+ * Carousel slide image fallback choices.
+ *
+ * @return array<string, string>
+ */
+function ac_tech_home_carousel_image_fallback_choices() {
+	return array(
+		'hero-hvac'          => 'hero-hvac',
+		'service-instalare'  => 'service-instalare',
+		'service-igienizare' => 'service-igienizare',
+		'service-diagnostic' => 'service-diagnostic',
+		'service-mentenanta' => 'service-mentenanta',
+	);
+}
+
+/**
+ * @return int
+ */
+function ac_tech_home_hero_slide_count() {
+	return 3;
+}
+
+/**
+ * @param int $slide_index Slide number 1–3.
+ * @return string
+ */
+function ac_tech_home_hero_slide_field_name( $slide_index, $suffix ) {
+	return 'hero_slide_' . (int) $slide_index . '_' . $suffix;
+}
+
+/**
+ * @return string[]
+ */
+function ac_tech_home_hero_slide_acf_field_names() {
+	$suffixes = array(
+		'badge_icon',
+		'badge_text',
+		'title',
+		'title_accent',
+		'text',
+		'cta_label',
+		'cta_url',
+		'image',
+		'image_fallback',
+	);
+	$names    = array();
+
+	for ( $i = 1; $i <= ac_tech_home_hero_slide_count(); $i++ ) {
+		foreach ( $suffixes as $suffix ) {
+			$names[] = ac_tech_home_hero_slide_field_name( $i, $suffix );
+		}
+	}
+
+	return $names;
+}
+
+/**
+ * Default ACF values for one carousel slide.
+ *
+ * @param int $slide_index Slide number 1–3.
+ * @return array<string, string|int>
+ */
+function ac_tech_get_home_hero_slide_field_defaults( $slide_index ) {
+	$slide_index = max( 1, min( ac_tech_home_hero_slide_count(), (int) $slide_index ) );
+	$base_slides = ac_tech_get_home_hero_carousel_base();
+	$slide       = isset( $base_slides[ $slide_index - 1 ] ) ? $base_slides[ $slide_index - 1 ] : array();
+	$fallback    = '';
+
+	if ( ! empty( $slide['image']['slug'] ) ) {
+		$fallback = (string) $slide['image']['slug'];
+	}
+
+	return array(
+		ac_tech_home_hero_slide_field_name( $slide_index, 'badge_icon' )     => (string) ( $slide['badge_icon'] ?? 'sell' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'badge_text' )     => (string) ( $slide['badge_text'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'title' )          => (string) ( $slide['title'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'title_accent' )    => (string) ( $slide['title_accent'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'text' )           => (string) ( $slide['text'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'cta_label' )      => (string) ( $slide['cta_label'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'cta_url' )        => (string) ( $slide['cta_url'] ?? '' ),
+		ac_tech_home_hero_slide_field_name( $slide_index, 'image' )          => 0,
+		ac_tech_home_hero_slide_field_name( $slide_index, 'image_fallback' )   => $fallback,
+	);
+}
+
+/**
+ * @return array<string, string|int>
+ */
+function ac_tech_get_home_hero_slide_all_field_defaults() {
+	$defaults = array();
+
+	for ( $i = 1; $i <= ac_tech_home_hero_slide_count(); $i++ ) {
+		$defaults = array_merge( $defaults, ac_tech_get_home_hero_slide_field_defaults( $i ) );
+	}
+
+	return $defaults;
+}
+
+/**
+ * @deprecated Hero text fields replaced by carousel repeater.
  *
  * @return array<string, string>
  */
 function ac_tech_home_hero_editable_text_map() {
-	return array(
-		'hero_badge_text'        => 'badge_text',
-		'hero_title'             => 'title',
-		'hero_title_accent'      => 'title_accent',
-		'hero_text'              => 'text',
-		'hero_cta_primary'       => 'cta_primary',
-		'hero_cta_primary_url'   => 'cta_primary_url',
-		'hero_cta_secondary'     => 'cta_secondary',
-		'hero_cta_secondary_url' => 'cta_secondary_url',
-		'hero_card_title'        => 'card_title',
-		'hero_card_text'         => 'card_text',
-	);
+	return array();
 }
 
 /**
@@ -40,6 +129,7 @@ function ac_tech_home_hero_editable_text_map() {
 function ac_tech_home_simple_acf_field_names() {
 	return array_merge(
 		array_keys( ac_tech_home_hero_editable_text_map() ),
+		ac_tech_home_hero_slide_acf_field_names(),
 		array(
 			'home_adv_title',
 			'home_adv_text',
@@ -134,15 +224,7 @@ function ac_tech_home_merge_header( $base, $field_map ) {
  * @return array<string, string>
  */
 function ac_tech_get_home_hero_editable_defaults() {
-	$base = ac_tech_get_home_hero_base();
-	$map  = ac_tech_home_hero_editable_text_map();
-	$out  = array();
-
-	foreach ( $map as $field_name => $hero_key ) {
-		$out[ $field_name ] = isset( $base[ $hero_key ] ) ? (string) $base[ $hero_key ] : '';
-	}
-
-	return apply_filters( 'ac_tech_home_hero_editable_defaults', $out );
+	return apply_filters( 'ac_tech_home_hero_editable_defaults', array() );
 }
 
 /**
@@ -151,7 +233,7 @@ function ac_tech_get_home_hero_editable_defaults() {
  * @return array<string, string>
  */
 function ac_tech_get_home_simple_field_defaults() {
-	$defaults = ac_tech_get_home_hero_editable_defaults();
+	$defaults = ac_tech_get_home_hero_slide_all_field_defaults();
 
 	$adv_h = ac_tech_get_home_advantages_header_base();
 	$defaults['home_adv_title'] = $adv_h['title'];
@@ -244,14 +326,120 @@ function ac_tech_get_home_repeater_defaults( $field_name ) {
 }
 
 /**
+ * Copy legacy repeater rows into flat slide fields when needed.
+ *
+ * @param int $page_id Front page ID.
+ */
+function ac_tech_migrate_home_hero_slides_repeater_to_flat( $page_id ) {
+	if ( ! function_exists( 'update_field' ) || $page_id <= 0 ) {
+		return;
+	}
+
+	foreach ( ac_tech_home_hero_slide_acf_field_names() as $field_name ) {
+		$existing = ac_tech_get_home_acf_stored_value( $field_name, $page_id );
+		if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
+			return;
+		}
+	}
+
+	$rows = ac_tech_get_home_acf_stored_value( 'home_hero_slides', $page_id );
+	if ( ! is_array( $rows ) || empty( $rows ) ) {
+		return;
+	}
+
+	$map = array(
+		'hero_slide_badge_icon'     => 'badge_icon',
+		'hero_slide_badge_text'     => 'badge_text',
+		'hero_slide_title'          => 'title',
+		'hero_slide_title_accent'   => 'title_accent',
+		'hero_slide_text'           => 'text',
+		'hero_slide_cta_label'      => 'cta_label',
+		'hero_slide_cta_url'        => 'cta_url',
+		'hero_slide_image'          => 'image',
+		'hero_slide_image_fallback' => 'image_fallback',
+	);
+
+	for ( $i = 0; $i < min( ac_tech_home_hero_slide_count(), count( $rows ) ); $i++ ) {
+		$row = $rows[ $i ];
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+
+		$slide_index = $i + 1;
+		foreach ( $map as $legacy_key => $suffix ) {
+			if ( ! isset( $row[ $legacy_key ] ) || ac_tech_home_acf_value_is_empty( $row[ $legacy_key ] ) ) {
+				continue;
+			}
+
+			update_field(
+				ac_tech_home_hero_slide_field_name( $slide_index, $suffix ),
+				$row[ $legacy_key ],
+				$page_id
+			);
+		}
+	}
+}
+
+/**
+ * Seed hero carousel flat fields on the front page.
+ *
+ * @param int $page_id Front page ID.
+ */
+function ac_tech_seed_home_hero_slide_fields( $page_id ) {
+	if ( ! function_exists( 'update_field' ) || ! function_exists( 'get_field' ) || $page_id <= 0 ) {
+		return;
+	}
+
+	ac_tech_migrate_home_hero_slides_repeater_to_flat( $page_id );
+
+	foreach ( ac_tech_get_home_hero_slide_all_field_defaults() as $field_name => $value ) {
+		if ( ac_tech_home_acf_value_is_empty( $value ) ) {
+			continue;
+		}
+
+		$existing = ac_tech_get_home_acf_stored_value( $field_name, $page_id );
+		if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
+			continue;
+		}
+
+		update_field( $field_name, $value, $page_id );
+	}
+}
+
+/**
+ * Read ACF value from the database only (skip load_value theme defaults).
+ *
+ * @param string $field_name Field name.
+ * @param int    $post_id    Post ID.
+ * @return mixed
+ */
+function ac_tech_get_home_acf_stored_value( $field_name, $post_id ) {
+	if ( ! function_exists( 'get_field' ) || $post_id <= 0 ) {
+		return null;
+	}
+
+	$filter  = 'ac_tech_acf_load_home_field_value';
+	$removed = false;
+
+	if ( has_filter( 'acf/load_value', $filter ) ) {
+		remove_filter( 'acf/load_value', $filter, 10 );
+		$removed = true;
+	}
+
+	$value = get_field( $field_name, $post_id, false );
+
+	if ( $removed ) {
+		add_filter( 'acf/load_value', $filter, 10, 3 );
+	}
+
+	return $value;
+}
+
+/**
  * Seed all homepage ACF fields on the static front page.
  */
 function ac_tech_seed_home_acf_fields() {
 	if ( ! function_exists( 'update_field' ) || ! function_exists( 'get_field' ) ) {
-		return;
-	}
-
-	if ( get_option( AC_TECH_HOME_SEED_OPTION ) ) {
 		return;
 	}
 
@@ -260,31 +448,49 @@ function ac_tech_seed_home_acf_fields() {
 		return;
 	}
 
-	foreach ( ac_tech_get_home_simple_field_defaults() as $field_name => $value ) {
-		if ( '' === (string) $value ) {
-			continue;
+	if ( ! get_option( AC_TECH_HOME_SEED_OPTION ) ) {
+		foreach ( ac_tech_get_home_simple_field_defaults() as $field_name => $value ) {
+			if ( ac_tech_home_acf_value_is_empty( $value ) ) {
+				continue;
+			}
+			$existing = ac_tech_get_home_acf_stored_value( $field_name, $page_id );
+			if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
+				continue;
+			}
+			update_field( $field_name, $value, $page_id );
 		}
-		$existing = get_field( $field_name, $page_id );
-		if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
-			continue;
+
+		foreach ( ac_tech_home_repeater_acf_field_names() as $repeater_name ) {
+			$existing = ac_tech_get_home_acf_stored_value( $repeater_name, $page_id );
+			if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
+				continue;
+			}
+			$rows = ac_tech_get_home_repeater_defaults( $repeater_name );
+			if ( ! empty( $rows ) ) {
+				update_field( $repeater_name, $rows, $page_id );
+			}
 		}
-		update_field( $field_name, $value, $page_id );
+
+		update_option( AC_TECH_HOME_SEED_OPTION, 1, false );
 	}
 
-	foreach ( ac_tech_home_repeater_acf_field_names() as $repeater_name ) {
-		$existing = get_field( $repeater_name, $page_id );
-		if ( ! ac_tech_home_acf_value_is_empty( $existing ) ) {
-			continue;
-		}
-		$rows = ac_tech_get_home_repeater_defaults( $repeater_name );
-		if ( ! empty( $rows ) ) {
-			update_field( $repeater_name, $rows, $page_id );
-		}
-	}
-
-	update_option( AC_TECH_HOME_SEED_OPTION, 1, false );
+	ac_tech_seed_home_hero_slide_fields( $page_id );
 }
 add_action( 'acf/init', 'ac_tech_seed_home_acf_fields', 25 );
+
+/**
+ * Seed carousel slide fields (runs even after main homepage seed).
+ */
+function ac_tech_seed_home_carousel_acf_fields() {
+	$page_id = ac_tech_get_front_page_id();
+	if ( $page_id <= 0 ) {
+		return;
+	}
+
+	ac_tech_seed_home_hero_slide_fields( $page_id );
+	update_option( AC_TECH_HOME_CAROUSEL_SEED_OPTION, 1, false );
+}
+add_action( 'acf/init', 'ac_tech_seed_home_carousel_acf_fields', 26 );
 
 /** @deprecated */
 function ac_tech_seed_home_hero_acf_fields() {
@@ -302,10 +508,13 @@ function ac_tech_acf_load_home_field_value( $value, $post_id, $field ) {
 		return $value;
 	}
 
-	$field_name = (string) $field['name'];
-	$page_id    = ac_tech_get_front_page_id();
+	$field_name       = (string) $field['name'];
+	$page_id          = ac_tech_get_front_page_id();
+	$resolved_post_id = function_exists( 'ac_tech_acf_resolve_post_id' )
+		? ac_tech_acf_resolve_post_id( $post_id )
+		: (int) $post_id;
 
-	if ( $page_id <= 0 || (int) $post_id !== $page_id ) {
+	if ( $page_id <= 0 || $resolved_post_id !== $page_id ) {
 		return $value;
 	}
 
@@ -382,56 +591,169 @@ function ac_tech_get_home_hero_image_id() {
 }
 
 /**
- * @param array<string, mixed> $hero Hero defaults.
- * @return array<string, mixed>
+ * @param array<int, array<string, mixed>> $base Carousel slides.
+ * @return array<int, array<string, mixed>>
  */
-function ac_tech_home_hero_apply_editable( $hero ) {
-	foreach ( ac_tech_home_hero_editable_text_map() as $field_name => $hero_key ) {
-		$current = isset( $hero[ $hero_key ] ) ? (string) $hero[ $hero_key ] : '';
-		$value   = ac_tech_get_home_hero_field( $field_name, $current );
+function ac_tech_home_merge_hero_carousel( $base ) {
+	$out = array();
 
-		if ( '' !== $value ) {
-			if ( '_url' === substr( $hero_key, -4 ) ) {
-				$hero[ $hero_key ] = esc_url_raw( $value );
-			} else {
-				$hero[ $hero_key ] = $value;
+	for ( $i = 1; $i <= ac_tech_home_hero_slide_count(); $i++ ) {
+		$item = isset( $base[ $i - 1 ] ) ? $base[ $i - 1 ] : array(
+			'badge_icon'   => 'sell',
+			'badge_text'   => '',
+			'title'        => '',
+			'title_accent' => '',
+			'text'         => '',
+			'cta_label'    => '',
+			'cta_url'      => '',
+			'cta_icon'     => 'arrow_forward',
+			'image'        => ac_tech_get_home_carousel_image_config( 'hero-hvac' ),
+		);
+
+		$badge_icon = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'badge_icon' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $badge_icon ) ) {
+			$item['badge_icon'] = sanitize_key( (string) $badge_icon );
+		}
+
+		$badge_text = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'badge_text' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $badge_text ) ) {
+			$item['badge_text'] = (string) $badge_text;
+		}
+
+		$title = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'title' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $title ) ) {
+			$item['title'] = (string) $title;
+		}
+
+		$title_accent = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'title_accent' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $title_accent ) ) {
+			$item['title_accent'] = (string) $title_accent;
+		}
+
+		$text = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'text' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $text ) ) {
+			$item['text'] = (string) $text;
+		}
+
+		$cta_label = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'cta_label' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $cta_label ) ) {
+			$item['cta_label'] = (string) $cta_label;
+		}
+
+		$cta_url = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'cta_url' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $cta_url ) ) {
+			$item['cta_url'] = esc_url_raw( (string) $cta_url );
+		}
+
+		$image_id = (int) ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'image' ), 0 );
+		if ( $image_id > 0 ) {
+			$item['image_attachment_id'] = $image_id;
+		}
+
+		$fallback = ac_tech_get_home_acf_field( ac_tech_home_hero_slide_field_name( $i, 'image_fallback' ), null );
+		if ( ! ac_tech_home_acf_value_is_empty( $fallback ) ) {
+			$fallback_key = sanitize_key( (string) $fallback );
+			if ( isset( ac_tech_home_carousel_image_fallback_choices()[ $fallback_key ] ) ) {
+				$item['image'] = ac_tech_get_home_carousel_image_config( $fallback_key );
 			}
 		}
+
+		$out[] = $item;
 	}
 
-	$image_id = ac_tech_get_home_hero_image_id();
-	if ( $image_id > 0 ) {
-		$hero['image_attachment_id'] = $image_id;
-	}
-
-	return $hero;
+	return ! empty( $out ) ? $out : $base;
 }
 
 /**
- * @param array<string, mixed> $hero Hero data.
+ * @param array<string, mixed> $slide Slide data.
+ * @param bool                 $is_first Whether this is the first (LCP) slide.
  * @return string
  */
-function ac_tech_render_home_hero_image( $hero ) {
-	$attachment_id = ! empty( $hero['image_attachment_id'] ) ? (int) $hero['image_attachment_id'] : 0;
+function ac_tech_render_home_carousel_slide_image( $slide, $is_first = false ) {
+	$attachment_id = ! empty( $slide['image_attachment_id'] ) ? (int) $slide['image_attachment_id'] : 0;
 
 	if ( $attachment_id > 0 ) {
 		$attr = array(
-			'class'         => 'ac-tech-home-hero__image',
-			'loading'       => 'eager',
-			'fetchpriority' => 'high',
-			'decoding'      => 'async',
-			'sizes'         => '(min-width: 64rem) 50vw, 100vw',
+			'class'    => 'ac-tech-home-carousel__media-img',
+			'loading'  => $is_first ? 'eager' : 'lazy',
+			'decoding' => 'async',
+			'sizes'    => '(min-width: 64rem) 50vw, 100vw',
 		);
+
+		if ( $is_first ) {
+			$attr['fetchpriority'] = 'high';
+		}
 
 		$html = ac_tech_get_acf_image( $attachment_id, 'large', $attr );
 		return $html ? $html : '';
 	}
 
-	if ( ! empty( $hero['image'] ) && is_array( $hero['image'] ) ) {
-		return ac_tech_responsive_image( $hero['image'] );
+	if ( ! empty( $slide['image'] ) && is_array( $slide['image'] ) ) {
+		$config = $slide['image'];
+		if ( $is_first ) {
+			$config['loading']       = 'eager';
+			$config['fetchpriority'] = 'high';
+		} else {
+			$config['loading'] = 'lazy';
+			unset( $config['fetchpriority'] );
+		}
+		$config['class'] = 'ac-tech-home-carousel__media-img';
+		return ac_tech_responsive_image( $config );
 	}
 
 	return '';
+}
+
+/** @deprecated Single hero editable merge — carousel uses ac_tech_home_merge_hero_carousel(). */
+function ac_tech_home_hero_apply_editable( $hero ) {
+	return $hero;
+}
+
+/**
+ * Highlight discount percentages and "gratuit" variants in carousel copy.
+ *
+ * @param string $text Plain text.
+ * @return string Safe HTML.
+ */
+function ac_tech_highlight_carousel_promo_text( $text ) {
+	$text = (string) $text;
+	if ( '' === $text ) {
+		return '';
+	}
+
+	$escaped = esc_html( $text );
+
+	$highlighted = preg_replace(
+		'/(\d+\s*%)/u',
+		'<span class="ac-tech-home-carousel__promo-highlight">$1</span>',
+		$escaped
+	);
+
+	if ( is_string( $highlighted ) ) {
+		$highlighted = preg_replace(
+			'/(?<![\p{L}])((?:gratuit)(?:[aăe]?))(?![\p{L}])/iu',
+			'<span class="ac-tech-home-carousel__promo-highlight">$1</span>',
+			$highlighted
+		);
+	}
+
+	if ( ! is_string( $highlighted ) ) {
+		return $escaped;
+	}
+
+	return wp_kses(
+		$highlighted,
+		array(
+			'span' => array(
+				'class' => true,
+			),
+		)
+	);
+}
+
+/** @deprecated */
+function ac_tech_render_home_hero_image( $hero ) {
+	return ac_tech_render_home_carousel_slide_image( $hero, true );
 }
 
 /**
