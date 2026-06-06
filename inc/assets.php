@@ -154,6 +154,15 @@ function ac_tech_enqueue_presentation_assets() {
 			);
 		}
 
+		if ( function_exists( 'ac_tech_is_montaj_ac_page' ) && ac_tech_is_montaj_ac_page() ) {
+			wp_enqueue_style(
+				'ac-tech-service-montaj',
+				get_template_directory_uri() . '/assets/css/service-montaj.css',
+				array( 'ac-tech-page-inner' ),
+				_S_VERSION
+			);
+		}
+
 		if ( ac_tech_is_booking_page() ) {
 			wp_enqueue_style(
 				'ac-tech-booking',

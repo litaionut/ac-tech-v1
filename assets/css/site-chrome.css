@@ -258,6 +258,24 @@ body {
 .ac-tech-site-header__actions {
 	display: none;
 	flex-shrink: 0;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.ac-tech-site-header__phone {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: inherit;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.ac-tech-site-header__phone:hover,
+.ac-tech-site-header__phone:focus {
+	color: var(--ac-tech-primary);
 }
 
 .ac-tech-site-header__drawer {
@@ -542,6 +560,25 @@ body {
 
 .site-footer .site-info {
 	display: none;
+}
+
+.ac-tech-gbp-review-cta {
+	margin: 1rem 0 0;
+	text-align: center;
+	font-size: 0.9375rem;
+}
+
+.ac-tech-gbp-review-cta__link {
+	color: var(--ac-tech-primary);
+	font-weight: 500;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+.ac-tech-site-footer__review {
+	margin-top: 1.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--ac-tech-outline-variant);
 }
 
 .ac-tech-icon {

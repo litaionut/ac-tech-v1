@@ -9,6 +9,10 @@
  * @return array<string, mixed>
  */
 function ac_tech_get_service_igienizare_hero() {
+	$phone_display = function_exists( 'ac_tech_get_business_phone_display' ) ? ac_tech_get_business_phone_display() : '';
+	$phone_tel     = function_exists( 'ac_tech_get_business_phone_tel' ) ? ac_tech_get_business_phone_tel() : '';
+	$whatsapp      = function_exists( 'ac_tech_get_business_whatsapp_digits' ) ? ac_tech_get_business_whatsapp_digits() : '';
+
 	return apply_filters(
 		'ac_tech_service_igienizare_hero',
 		array(
@@ -17,9 +21,9 @@ function ac_tech_get_service_igienizare_hero() {
 			'title'       => __( 'Igienizare Aer Condiționat București și Ilfov –', 'ac-tech' ),
 			'title_accent'=> __( 'Curățare Profesională', 'ac-tech' ),
 			'text'        => __( 'Protejați-vă sănătatea și prelungiți durata de viață a aparatului cu servicii de revizie completă. Intervenții rapide în toate sectoarele și localitățile din Ilfov.', 'ac-tech' ),
-			'phone'       => '+40700000000',
-			'phone_label' => __( 'Sună Acum', 'ac-tech' ),
-			'whatsapp'    => '40700000000',
+			'phone'       => $phone_tel ? preg_replace( '/\D+/', '', $phone_tel ) : '',
+			'phone_label' => $phone_display ? $phone_display : __( 'Sună acum', 'ac-tech' ),
+			'whatsapp'    => $whatsapp,
 			'whatsapp_label' => __( 'WhatsApp', 'ac-tech' ),
 			'trust'       => array(
 				array(
@@ -298,14 +302,18 @@ function ac_tech_get_service_igienizare_faq_sidebar() {
  * @return array<string, mixed>
  */
 function ac_tech_get_service_igienizare_cta() {
+	$phone_display = function_exists( 'ac_tech_get_business_phone_display' ) ? ac_tech_get_business_phone_display() : '';
+	$phone_tel     = function_exists( 'ac_tech_get_business_phone_tel' ) ? ac_tech_get_business_phone_tel() : '';
+	$whatsapp      = function_exists( 'ac_tech_get_business_whatsapp_digits' ) ? ac_tech_get_business_whatsapp_digits() : '';
+
 	return apply_filters(
 		'ac_tech_service_igienizare_cta',
 		array(
 			'title'            => __( 'Aer Curat la un Telefon Distanță', 'ac-tech' ),
 			'text'             => __( 'Nu lăsa praful și bacteriile să îți afecteze confortul. Programează astăzi o intervenție în București sau Ilfov.', 'ac-tech' ),
-			'phone'            => '+40700000000',
-			'phone_label'      => '+40 700 000 000',
-			'whatsapp'         => '40700000000',
+			'phone'            => $phone_tel ? preg_replace( '/\D+/', '', $phone_tel ) : '',
+			'phone_label'      => $phone_display ? $phone_display : __( 'Sună acum', 'ac-tech' ),
+			'whatsapp'         => $whatsapp,
 			'whatsapp_label'   => __( 'Cere Ofertă WhatsApp', 'ac-tech' ),
 		)
 	);

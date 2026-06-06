@@ -67,13 +67,18 @@ function ac_tech_get_contact_form() {
  * @return array<string, string>
  */
 function ac_tech_get_contact_info_base() {
+	$phone = function_exists( 'ac_tech_get_business_phone_display' ) ? ac_tech_get_business_phone_display() : '';
+	$email = function_exists( 'ac_tech_get_business_email' ) ? ac_tech_get_business_email() : 'contact@ac-tech.ro';
+	$schedule = function_exists( 'ac_tech_get_business_info' ) ? (string) ( ac_tech_get_business_info()['schedule'] ?? '' ) : __( 'Luni – Vineri: 09:00 – 18:00', 'ac-tech' );
+
 	return apply_filters(
 		'ac_tech_contact_info_defaults',
 		array(
 			'title'    => __( 'Date de contact', 'ac-tech' ),
-			'email'    => 'contact@ac-tech.ro',
-			'phone'    => '+40 7xx xxx xxx',
-			'schedule' => __( 'Luni – Vineri: 08:00 – 18:00', 'ac-tech' ),
+			'email'    => $email,
+			'phone'    => $phone,
+			'schedule' => $schedule,
+			'address'  => function_exists( 'ac_tech_get_business_address_line' ) ? ac_tech_get_business_address_line() : '',
 		)
 	);
 }

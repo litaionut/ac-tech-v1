@@ -11,8 +11,10 @@ $section_title = isset( $info['title'] ) ? $info['title'] : '';
 $email         = isset( $info['email'] ) ? $info['email'] : '';
 $phone         = isset( $info['phone'] ) ? $info['phone'] : '';
 $schedule      = isset( $info['schedule'] ) ? $info['schedule'] : '';
+$address       = isset( $info['address'] ) ? $info['address'] : '';
+$maps_url      = function_exists( 'ac_tech_get_business_info' ) ? (string) ( ac_tech_get_business_info()['maps_url'] ?? '' ) : '';
 
-if ( '' === $section_title && '' === $email && '' === $phone && '' === $schedule ) {
+if ( '' === $section_title && '' === $email && '' === $phone && '' === $schedule && '' === $address ) {
 	return;
 }
 ?>
@@ -33,7 +35,20 @@ if ( '' === $section_title && '' === $email && '' === $phone && '' === $schedule
 		<?php if ( $phone ) : ?>
 			<li>
 				<span class="ac-tech-contact-info__label"><?php esc_html_e( 'Telefon', 'ac-tech' ); ?></span>
-				<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
+				<?php
+				$tel = function_exists( 'ac_tech_get_business_phone_tel' ) ? ac_tech_get_business_phone_tel() : preg_replace( '/\s+/', '', $phone );
+				?>
+				<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $tel ) ); ?>"><?php echo esc_html( $phone ); ?></a>
+			</li>
+		<?php endif; ?>
+		<?php if ( $address ) : ?>
+			<li>
+				<span class="ac-tech-contact-info__label"><?php esc_html_e( 'Adresă', 'ac-tech' ); ?></span>
+				<?php if ( $maps_url && wp_http_validate_url( $maps_url ) ) : ?>
+					<a href="<?php echo esc_url( $maps_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $address ); ?></a>
+				<?php else : ?>
+					<span><?php echo esc_html( $address ); ?></span>
+				<?php endif; ?>
 			</li>
 		<?php endif; ?>
 		<?php if ( $schedule ) : ?>

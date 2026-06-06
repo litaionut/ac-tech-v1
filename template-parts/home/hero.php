@@ -37,15 +37,19 @@ $slide_count = count( $slides );
 							</span>
 						<?php endif; ?>
 
-						<h1 class="ac-tech-home-carousel__title">
-							<?php
-							echo ac_tech_highlight_carousel_promo_text( (string) ( $slide['title'] ?? '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							if ( ! empty( $slide['title_accent'] ) ) :
-								?>
-								<br>
-								<span class="ac-tech-home-carousel__title-accent"><?php echo ac_tech_highlight_carousel_promo_text( (string) $slide['title_accent'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-							<?php endif; ?>
-						</h1>
+						<?php
+						$heading_tag = 0 === $index ? 'h1' : 'h2';
+						$heading_class = 'ac-tech-home-carousel__title';
+						printf( '<%1$s class="%2$s">', esc_attr( $heading_tag ), esc_attr( $heading_class ) );
+						echo ac_tech_highlight_carousel_promo_text( (string) ( $slide['title'] ?? '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						if ( ! empty( $slide['title_accent'] ) ) :
+							?>
+							<br>
+							<span class="ac-tech-home-carousel__title-accent"><?php echo ac_tech_highlight_carousel_promo_text( (string) $slide['title_accent'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<?php
+						endif;
+						printf( '</%s>', esc_attr( $heading_tag ) );
+						?>
 
 						<?php if ( ! empty( $slide['text'] ) ) : ?>
 							<p class="ac-tech-home-carousel__text"><?php echo ac_tech_highlight_carousel_promo_text( (string) $slide['text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>

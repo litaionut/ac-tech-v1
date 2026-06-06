@@ -1625,6 +1625,11 @@ html:has(.site-main--front) {
 	font-weight: 700;
 }
 
+a.ac-tech-home-reviews__score {
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
 .ac-tech-home-reviews__grid {
 	display: grid;
 	gap: var(--ac-tech-grid-gutter);

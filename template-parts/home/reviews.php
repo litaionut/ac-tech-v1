@@ -7,17 +7,26 @@
 
 $header  = ac_tech_get_home_reviews_header();
 $reviews = ac_tech_get_home_reviews();
+$gbp_url = function_exists( 'ac_tech_has_gbp_review_url' ) && ac_tech_has_gbp_review_url()
+	? (string) ( ac_tech_get_business_info()['gbp_review_url'] ?? '' )
+	: '';
 ?>
 <section class="ac-tech-home-section ac-tech-home-reviews" id="recenzii" aria-labelledby="ac-tech-home-reviews-title">
 	<div class="ac-tech-container">
 		<div class="ac-tech-home-section__header ac-tech-home-section__header--center">
 			<h2 id="ac-tech-home-reviews-title" class="ac-tech-home-section__title"><?php echo esc_html( $header['title'] ); ?></h2>
-			<div class="ac-tech-home-reviews__rating" aria-label="<?php echo esc_attr( $header['rating'] ); ?>">
-				<?php for ( $i = 0; $i < 5; $i++ ) : ?>
-					<?php ac_tech_icon( 'star', 'ac-tech-home-reviews__star' ); ?>
-				<?php endfor; ?>
-				<span class="ac-tech-home-reviews__score"><?php echo esc_html( $header['rating'] ); ?></span>
-			</div>
+			<?php if ( ! empty( $header['rating'] ) ) : ?>
+				<div class="ac-tech-home-reviews__rating" aria-label="<?php echo esc_attr( $header['rating'] ); ?>">
+					<?php for ( $i = 0; $i < 5; $i++ ) : ?>
+						<?php ac_tech_icon( 'star', 'ac-tech-home-reviews__star' ); ?>
+					<?php endfor; ?>
+					<?php if ( $gbp_url ) : ?>
+						<a class="ac-tech-home-reviews__score" href="<?php echo esc_url( $gbp_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $header['rating'] ); ?></a>
+					<?php else : ?>
+						<span class="ac-tech-home-reviews__score"><?php echo esc_html( $header['rating'] ); ?></span>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="ac-tech-home-reviews__grid">
@@ -44,5 +53,9 @@ $reviews = ac_tech_get_home_reviews();
 				</article>
 			<?php endforeach; ?>
 		</div>
+
+		<?php if ( function_exists( 'ac_tech_render_gbp_review_cta' ) ) : ?>
+			<?php ac_tech_render_gbp_review_cta( 'ac-tech-home-reviews__gbp-cta' ); ?>
+		<?php endif; ?>
 	</div>
 </section>

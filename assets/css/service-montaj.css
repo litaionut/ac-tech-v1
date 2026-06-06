@@ -1,0 +1,210 @@
+/**
+ * Montaj AC București service page styles.
+ */
+
+.site-main--service-montaj .entry-header {
+	display: none;
+}
+
+.ac-tech-svc-montaj-hero {
+	padding-block: clamp(4rem, 8vw, 7rem);
+	background: radial-gradient(circle at top right, var(--ac-tech-surface), var(--ac-tech-surface-container-lowest));
+}
+
+.ac-tech-svc-montaj-hero__grid {
+	display: grid;
+	gap: 2.5rem;
+	align-items: center;
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-svc-montaj-hero__grid {
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+	}
+}
+
+.ac-tech-svc-montaj-hero__title {
+	margin: 1rem 0;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.15;
+	font-weight: 700;
+	color: var(--ac-tech-on-surface);
+}
+
+.ac-tech-svc-montaj-hero__text {
+	margin: 0 0 1.5rem;
+	max-width: 38rem;
+	color: var(--ac-tech-on-surface-variant);
+	line-height: 1.6;
+}
+
+.ac-tech-svc-montaj-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.ac-tech-svc-montaj-hero__media img {
+	width: 100%;
+	height: auto;
+	border-radius: var(--ac-tech-radius-lg, 1rem);
+}
+
+.ac-tech-svc-montaj-section {
+	padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.ac-tech-svc-montaj-section--alt {
+	background: var(--ac-tech-surface-container-low);
+}
+
+.ac-tech-svc-montaj-section__header {
+	margin-bottom: 2rem;
+	max-width: 42rem;
+}
+
+.ac-tech-svc-montaj-section__header--center {
+	margin-inline: auto;
+	text-align: center;
+}
+
+.ac-tech-svc-montaj-section__title {
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 600;
+}
+
+.ac-tech-svc-montaj-section__lead {
+	margin: 0;
+	color: var(--ac-tech-on-surface-variant);
+	line-height: 1.6;
+}
+
+.ac-tech-svc-montaj-includes {
+	display: grid;
+	gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+	.ac-tech-svc-montaj-includes {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 64rem) {
+	.ac-tech-svc-montaj-includes {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.ac-tech-svc-montaj-include {
+	padding: 1.25rem;
+	border: 1px solid var(--ac-tech-outline-variant);
+	border-radius: var(--ac-tech-radius-md, 0.75rem);
+	background: var(--ac-tech-surface);
+}
+
+.ac-tech-svc-montaj-include__icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	margin-bottom: 0.75rem;
+	color: var(--ac-tech-primary);
+}
+
+.ac-tech-svc-montaj-include__title {
+	margin: 0 0 0.5rem;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.ac-tech-svc-montaj-include__text {
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.5;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-svc-montaj-table-wrap {
+	overflow-x: auto;
+}
+
+.ac-tech-svc-montaj-table {
+	width: 100%;
+	min-width: 32rem;
+	border-collapse: collapse;
+	background: var(--ac-tech-surface);
+	border-radius: var(--ac-tech-radius-md, 0.75rem);
+	overflow: hidden;
+}
+
+.ac-tech-svc-montaj-table th,
+.ac-tech-svc-montaj-table td {
+	padding: 0.875rem 1rem;
+	border-bottom: 1px solid var(--ac-tech-outline-variant);
+	text-align: left;
+}
+
+.ac-tech-svc-montaj-table thead th {
+	background: var(--ac-tech-surface-container-high);
+	font-weight: 600;
+}
+
+.ac-tech-svc-montaj-zones {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
+	padding: 0;
+	margin: 0 0 1rem;
+	list-style: none;
+}
+
+.ac-tech-svc-montaj-zones__item a {
+	display: inline-block;
+	padding: 0.5rem 0.875rem;
+	border-radius: 999px;
+	border: 1px solid var(--ac-tech-outline-variant);
+	background: var(--ac-tech-surface);
+	color: inherit;
+	text-decoration: none;
+	font-size: 0.9375rem;
+}
+
+.ac-tech-svc-montaj-zones__note {
+	max-width: 42rem;
+	margin: 0 auto;
+	text-align: center;
+	color: var(--ac-tech-on-surface-variant);
+	line-height: 1.6;
+}
+
+.ac-tech-svc-montaj-cta {
+	padding-block: clamp(3rem, 6vw, 4.5rem);
+	background: var(--ac-tech-primary-container);
+}
+
+.ac-tech-svc-montaj-cta__inner {
+	text-align: center;
+}
+
+.ac-tech-svc-montaj-cta__title {
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.ac-tech-svc-montaj-cta__text {
+	margin: 0 auto 1.25rem;
+	max-width: 36rem;
+	color: var(--ac-tech-on-surface-variant);
+}
+
+.ac-tech-svc-montaj-cta__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
+}
+
+.ac-tech-svc-montaj-cta__review {
+	margin-top: 1rem;
+}

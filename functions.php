@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.13.7' );
+	define( '_S_VERSION', '1.14.0' );
 }
 
 /**
@@ -165,6 +165,13 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-helpers.php';
 
 /**
+ * Canonical business NAP for SEO and contact blocks.
+ */
+require get_template_directory() . '/inc/business-info.php';
+require get_template_directory() . '/inc/customizer-business.php';
+require get_template_directory() . '/inc/seo.php';
+
+/**
  * Homepage static content helpers.
  */
 require get_template_directory() . '/inc/home-content.php';
@@ -175,6 +182,7 @@ require get_template_directory() . '/inc/home-acf-fields.php';
  * Igienizare AC service page content.
  */
 require get_template_directory() . '/inc/service-igienizare-content.php';
+require get_template_directory() . '/inc/service-montaj-content.php';
 
 /**
  * Booking page static content + custom booking engine.

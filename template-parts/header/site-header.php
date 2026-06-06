@@ -7,6 +7,8 @@
 
 $contact_url = function_exists( 'ac_tech_get_booking_url' ) ? ac_tech_get_booking_url() : home_url( '/contact/' );
 $cta_label   = apply_filters( 'ac_tech_header_cta_label', __( 'Programează acum', 'ac-tech' ) );
+$phone       = function_exists( 'ac_tech_get_business_phone_display' ) ? ac_tech_get_business_phone_display() : '';
+$phone_tel   = function_exists( 'ac_tech_get_business_phone_tel' ) ? ac_tech_get_business_phone_tel() : '';
 $site_name   = get_bloginfo( 'name', 'display' );
 ?>
 <header id="masthead" class="site-header ac-tech-site-header">
@@ -44,6 +46,12 @@ $site_name   = get_bloginfo( 'name', 'display' );
 				?>
 				<?php if ( $cta_label ) : ?>
 					<div class="ac-tech-site-header__actions">
+						<?php if ( $phone && $phone_tel ) : ?>
+							<a class="ac-tech-site-header__phone" href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone_tel ) ); ?>">
+								<?php ac_tech_icon( 'phone_in_talk' ); ?>
+								<span><?php echo esc_html( $phone ); ?></span>
+							</a>
+						<?php endif; ?>
 						<a class="ac-tech-btn ac-tech-btn--primary ac-tech-site-header__cta" href="<?php echo esc_url( $contact_url ); ?>">
 							<?php echo esc_html( $cta_label ); ?>
 						</a>

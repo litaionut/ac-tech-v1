@@ -356,11 +356,13 @@ function ac_tech_get_home_process_steps() {
  * @return array<string, string>
  */
 function ac_tech_get_home_reviews_header_base() {
+	$rating = function_exists( 'ac_tech_get_gbp_rating_label' ) ? ac_tech_get_gbp_rating_label() : '';
+
 	return apply_filters(
 		'ac_tech_home_reviews_header',
 		array(
 			'title'  => __( 'Ce spun clienții noștri', 'ac-tech' ),
-			'rating' => __( '4.9/5 pe Google', 'ac-tech' ),
+			'rating' => $rating,
 		)
 	);
 }
@@ -385,11 +387,11 @@ function ac_tech_get_home_reviews_base() {
 		array(
 			array(
 				'text'        => __( 'O echipă extrem de profesionistă. Au venit la ora stabilită, au lucrat curat și au explicat tot procesul de igienizare. Recomand cu mare drag!', 'ac-tech' ),
-				'name'        => 'Elena Ionescu',
-				'role'        => __( 'Proprietar Apartament', 'ac-tech' ),
+				'name'        => __( 'Client rezidențial', 'ac-tech' ),
+				'role'        => __( 'Sector 3, București', 'ac-tech' ),
 				'avatar'      => array(
 					'slug'    => 'avatar-review-1',
-					'alt'     => '',
+					'alt'     => __( 'Client AC-tech', 'ac-tech' ),
 					'width'   => 48,
 					'height'  => 48,
 					'widths'  => array( 96 ),
@@ -399,12 +401,12 @@ function ac_tech_get_home_reviews_base() {
 				'featured'    => false,
 			),
 			array(
-				'text'        => __( 'Colaborăm cu AC Pro pentru spațiul nostru de birouri de peste 2 ani. Servicii de mentenanță impecabile, nu am avut nicio problemă chiar și în cele mai fierbinți zile de vară.', 'ac-tech' ),
-				'name'        => 'Marius Popa',
-				'role'        => __( 'Manager Operativ', 'ac-tech' ),
+				'text'        => __( 'Colaborăm cu AC-tech pentru spațiul nostru de birouri de peste 2 ani. Servicii de mentenanță impecabile, nu am avut nicio problemă chiar și în cele mai fierbinți zile de vară.', 'ac-tech' ),
+				'name'        => __( 'Client business', 'ac-tech' ),
+				'role'        => __( 'Spațiu comercial, București', 'ac-tech' ),
 				'avatar'      => array(
 					'slug'    => 'avatar-review-2',
-					'alt'     => '',
+					'alt'     => __( 'Client AC-tech', 'ac-tech' ),
 					'width'   => 48,
 					'height'  => 48,
 					'widths'  => array( 96 ),
@@ -415,11 +417,11 @@ function ac_tech_get_home_reviews_base() {
 			),
 			array(
 				'text'        => __( 'Instalarea a decurs perfect. Au fost atenți la detalii și au lăsat locul curat. Prețul a fost exact cel comunicat la început. Foarte mulțumit!', 'ac-tech' ),
-				'name'        => 'Andreea Stoica',
-				'role'        => __( 'Client Rezidențial', 'ac-tech' ),
+				'name'        => __( 'Client rezidențial', 'ac-tech' ),
+				'role'        => __( 'Apartament, Ilfov', 'ac-tech' ),
 				'avatar'      => array(
 					'slug'    => 'avatar-review-3',
-					'alt'     => '',
+					'alt'     => __( 'Client AC-tech', 'ac-tech' ),
 					'width'   => 48,
 					'height'  => 48,
 					'widths'  => array( 96 ),
@@ -458,7 +460,7 @@ function ac_tech_get_home_cta_final_base() {
 			'text'     => __( 'Programarea ta este la doar câteva clicuri distanță. Simplu, rapid și profesionist.', 'ac-tech' ),
 			'btn_text' => __( 'Programare rapidă online', 'ac-tech' ),
 			'btn_url'  => $booking_url,
-			'phone'    => '+40 700 000 000',
+			'phone'    => function_exists( 'ac_tech_get_business_phone_display' ) ? ac_tech_get_business_phone_display() : '',
 		)
 	);
 }

@@ -21,9 +21,12 @@ $cta = ac_tech_get_home_cta_final();
 					<?php ac_tech_icon( 'bolt' ); ?>
 				</a>
 				<?php if ( ! empty( $cta['phone'] ) ) : ?>
+					<?php
+					$tel = function_exists( 'ac_tech_get_business_phone_tel' ) ? ac_tech_get_business_phone_tel() : preg_replace( '/\s+/', '', (string) $cta['phone'] );
+					?>
 					<p class="ac-tech-home-cta-final__phone">
 						<?php ac_tech_icon( 'phone_in_talk' ); ?>
-						<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $cta['phone'] ) ); ?>"><?php echo esc_html( $cta['phone'] ); ?></a>
+						<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $tel ) ); ?>"><?php echo esc_html( $cta['phone'] ); ?></a>
 					</p>
 				<?php endif; ?>
 			</div>

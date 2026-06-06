@@ -23,14 +23,22 @@ $hero = ac_tech_get_service_igienizare_hero();
 			<p class="ac-tech-svc-ig-hero__text"><?php echo esc_html( $hero['text'] ); ?></p>
 
 			<div class="ac-tech-svc-ig-hero__actions">
-				<a class="ac-tech-btn ac-tech-btn--primary ac-tech-svc-ig-hero__btn" href="<?php echo esc_url( 'tel:' . $hero['phone'] ); ?>">
-					<?php ac_tech_icon( 'call' ); ?>
-					<?php echo esc_html( $hero['phone_label'] ); ?>
-				</a>
-				<a class="ac-tech-btn ac-tech-btn--secondary ac-tech-svc-ig-hero__btn ac-tech-svc-ig-hero__btn--outline" href="<?php echo esc_url( 'https://wa.me/' . $hero['whatsapp'] ); ?>" target="_blank" rel="noopener noreferrer">
-					<?php ac_tech_icon( 'chat_bubble' ); ?>
-					<?php echo esc_html( $hero['whatsapp_label'] ); ?>
-				</a>
+				<?php if ( ! empty( $hero['phone'] ) ) : ?>
+					<a class="ac-tech-btn ac-tech-btn--primary ac-tech-svc-ig-hero__btn" href="<?php echo esc_url( 'tel:+' . preg_replace( '/\D+/', '', (string) $hero['phone'] ) ); ?>">
+						<?php ac_tech_icon( 'call' ); ?>
+						<?php echo esc_html( $hero['phone_label'] ); ?>
+					</a>
+				<?php elseif ( function_exists( 'ac_tech_get_booking_url' ) ) : ?>
+					<a class="ac-tech-btn ac-tech-btn--primary ac-tech-svc-ig-hero__btn" href="<?php echo esc_url( ac_tech_get_booking_url() ); ?>">
+						<?php esc_html_e( 'Programează online', 'ac-tech' ); ?>
+					</a>
+				<?php endif; ?>
+				<?php if ( ! empty( $hero['whatsapp'] ) ) : ?>
+					<a class="ac-tech-btn ac-tech-btn--secondary ac-tech-svc-ig-hero__btn ac-tech-svc-ig-hero__btn--outline" href="<?php echo esc_url( 'https://wa.me/' . $hero['whatsapp'] ); ?>" target="_blank" rel="noopener noreferrer">
+						<?php ac_tech_icon( 'chat_bubble' ); ?>
+						<?php echo esc_html( $hero['whatsapp_label'] ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 
 			<div class="ac-tech-svc-ig-hero__trust">

@@ -51,6 +51,15 @@ function ac_tech_is_services_all_page() {
 }
 
 /**
+ * Whether the current page uses the Montaj AC template.
+ *
+ * @return bool
+ */
+function ac_tech_is_montaj_ac_page() {
+	return is_page_template( 'template-montaj-ac.php' );
+}
+
+/**
  * Default service cards for the services template and homepage preview.
  *
  * @return array<int, array{title: string, description: string, icon: string}>
@@ -97,20 +106,20 @@ function ac_tech_render_brand_logo() {
 function ac_tech_primary_nav_fallback( $args ) {
 	$links = array(
 		array(
+			'label' => __( 'Montaj AC', 'ac-tech' ),
+			'url'   => function_exists( 'ac_tech_get_montaj_page_url' ) ? ac_tech_get_montaj_page_url() : home_url( '/montaj-aer-conditionat-bucuresti/' ),
+		),
+		array(
 			'label' => __( 'Servicii', 'ac-tech' ),
-			'url'   => home_url( '/#servicii' ),
+			'url'   => function_exists( 'ac_tech_get_services_page_url' ) ? ac_tech_get_services_page_url() : home_url( '/servicii/' ),
 		),
 		array(
-			'label' => __( 'Avantaje', 'ac-tech' ),
-			'url'   => home_url( '/#avantaje' ),
+			'label' => __( 'Igienizare', 'ac-tech' ),
+			'url'   => function_exists( 'ac_tech_get_igienizare_page_url' ) ? ac_tech_get_igienizare_page_url() : home_url( '/igienizare-ac/' ),
 		),
 		array(
-			'label' => __( 'Cum funcționează', 'ac-tech' ),
-			'url'   => home_url( '/#proces' ),
-		),
-		array(
-			'label' => __( 'Recenzii', 'ac-tech' ),
-			'url'   => home_url( '/#recenzii' ),
+			'label' => __( 'Programare', 'ac-tech' ),
+			'url'   => function_exists( 'ac_tech_get_booking_url' ) ? ac_tech_get_booking_url() : home_url( '/programare/' ),
 		),
 	);
 
@@ -144,16 +153,16 @@ function ac_tech_get_footer_columns() {
 			'title' => __( 'Servicii', 'ac-tech' ),
 			'links' => array(
 				array(
-					'label' => __( 'Instalare AC', 'ac-tech' ),
-					'url'   => home_url( '/#servicii' ),
+					'label' => __( 'Montaj AC', 'ac-tech' ),
+					'url'   => function_exists( 'ac_tech_get_montaj_page_url' ) ? ac_tech_get_montaj_page_url() : home_url( '/montaj-aer-conditionat-bucuresti/' ),
 				),
 				array(
 					'label' => __( 'Igienizare AC', 'ac-tech' ),
-					'url'   => home_url( '/igienizare-ac/' ),
+					'url'   => function_exists( 'ac_tech_get_igienizare_page_url' ) ? ac_tech_get_igienizare_page_url() : home_url( '/igienizare-ac/' ),
 				),
 				array(
-					'label' => __( 'Consultanță', 'ac-tech' ),
-					'url'   => home_url( '/#servicii' ),
+					'label' => __( 'Toate serviciile', 'ac-tech' ),
+					'url'   => function_exists( 'ac_tech_get_services_page_url' ) ? ac_tech_get_services_page_url() : home_url( '/servicii/' ),
 				),
 			),
 		),
@@ -165,8 +174,8 @@ function ac_tech_get_footer_columns() {
 					'url'   => home_url( '/despre-noi/' ),
 				),
 				array(
-					'label' => __( 'Proces', 'ac-tech' ),
-					'url'   => home_url( '/#proces' ),
+					'label' => __( 'Prețuri servicii', 'ac-tech' ),
+					'url'   => function_exists( 'ac_tech_get_services_page_url' ) ? ac_tech_get_services_page_url() : home_url( '/servicii/' ),
 				),
 				array(
 					'label' => __( 'Contact', 'ac-tech' ),
