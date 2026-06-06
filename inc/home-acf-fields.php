@@ -411,10 +411,11 @@ function ac_tech_register_home_acf_field_group() {
 					'type'  => 'url',
 				),
 				array(
-					'key'   => 'field_ac_tech_home_cta_phone',
-					'label' => __( 'Telefon', 'ac-tech' ),
-					'name'  => 'home_cta_phone',
-					'type'  => 'text',
+					'key'     => 'field_ac_tech_home_cta_phone_note',
+					'label'   => __( 'Telefon CTA', 'ac-tech' ),
+					'name'    => '',
+					'type'    => 'message',
+					'message' => __( 'Telefonul din secțiunea CTA final folosește numărul din Aspect → Personalizare → AC-tech — Date firmă (NAP / SEO).', 'ac-tech' ),
 				),
 			),
 			'location'              => array(

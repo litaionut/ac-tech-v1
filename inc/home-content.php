@@ -473,5 +473,10 @@ function ac_tech_get_home_cta_final() {
 	if ( function_exists( 'ac_tech_home_merge_cta_final' ) ) {
 		$cta = ac_tech_home_merge_cta_final( $cta );
 	}
+
+	if ( function_exists( 'ac_tech_get_business_phone_display' ) ) {
+		$cta['phone'] = ac_tech_get_business_phone_display();
+	}
+
 	return $cta;
 }

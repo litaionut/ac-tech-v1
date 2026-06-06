@@ -145,7 +145,6 @@ function ac_tech_home_simple_acf_field_names() {
 			'home_cta_text',
 			'home_cta_btn_text',
 			'home_cta_btn_url',
-			'home_cta_phone',
 		)
 	);
 }
@@ -258,7 +257,6 @@ function ac_tech_get_home_simple_field_defaults() {
 	$defaults['home_cta_text']     = $cta['text'];
 	$defaults['home_cta_btn_text'] = $cta['btn_text'];
 	$defaults['home_cta_btn_url']  = $cta['btn_url'];
-	$defaults['home_cta_phone']    = $cta['phone'];
 
 	return apply_filters( 'ac_tech_home_simple_field_defaults', $defaults );
 }
@@ -990,16 +988,21 @@ function ac_tech_home_merge_reviews( $base ) {
  * @return array<string, mixed>
  */
 function ac_tech_home_merge_cta_final( $base ) {
-	return ac_tech_home_merge_header(
+	$base = ac_tech_home_merge_header(
 		$base,
 		array(
 			'home_cta_title'    => 'title',
 			'home_cta_text'     => 'text',
 			'home_cta_btn_text' => 'btn_text',
 			'home_cta_btn_url'  => 'btn_url',
-			'home_cta_phone'    => 'phone',
 		)
 	);
+
+	if ( function_exists( 'ac_tech_get_business_phone_display' ) ) {
+		$base['phone'] = ac_tech_get_business_phone_display();
+	}
+
+	return $base;
 }
 
 /**
